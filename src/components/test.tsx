@@ -1,3 +1,4 @@
+import * as S from './test.styles'
 import { toastActions, useAppDispatch, useAppSelector } from '@/store'
 
 export function Test() {
@@ -16,6 +17,7 @@ export function Test() {
       >
         {isVisible ? 'Desabilitar' : 'Habilitar'}
       </button>
+      <S.Button>Button</S.Button>
     </div>
   )
 }
