@@ -9,9 +9,9 @@ export default defineConfig({
   },
   optimizeDeps: {
     disabled: false
-  },
-  define: {
-    'process.env': process.env,
-    global: 'window'
   }
+  // define: {
+  //   'process.env': process.env,
+  //   global: 'window'
+  // }
 })
