@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ThemeContextData, ThemeContextDataProps } from './theme.provider'
+import { ThemeContextData, ThemeContextDataProps } from './theme.context'
 
 export const useTheme = (): ThemeContextDataProps => {
   const context = useContext(ThemeContextData)

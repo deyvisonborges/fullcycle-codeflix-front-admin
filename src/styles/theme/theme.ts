@@ -1,5 +1,5 @@
 import { DefaultTheme } from 'styled-components'
-import { ThemeMode } from './theme.provider'
+import { ThemeMode } from './theme.types'
 
 export const lightTheme: DefaultTheme = {
   background: {
