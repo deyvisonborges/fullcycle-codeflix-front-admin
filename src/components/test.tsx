@@ -17,7 +17,9 @@ export function Test() {
       >
         {isVisible ? 'Desabilitar' : 'Habilitar'}
       </button>
-      <S.Button>Button</S.Button>
+      <S.Button as="a" href="/dashboard">
+        Button
+      </S.Button>
     </div>
   )
 }
