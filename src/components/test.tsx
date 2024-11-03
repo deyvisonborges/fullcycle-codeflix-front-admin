@@ -20,6 +20,7 @@ export function Test() {
       <S.Button as="a" href="/dashboard">
         Button
       </S.Button>
+      <a href="/not-fount">Not found</a>
     </div>
   )
 }

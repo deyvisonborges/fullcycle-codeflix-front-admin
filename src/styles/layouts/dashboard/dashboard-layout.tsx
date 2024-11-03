@@ -9,6 +9,7 @@ export function DashboardLayout() {
       <Sidebar />
       <S.Content>
         <Header />
+        <a href="/dashboard/not-found">Nout foud dashboard nested</a>
         <Outlet />
       </S.Content>
     </S.Container>
