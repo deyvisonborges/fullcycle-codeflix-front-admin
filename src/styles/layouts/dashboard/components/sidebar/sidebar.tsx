@@ -6,7 +6,7 @@ export function Sidebar() {
     <S.Container>
       <p
         onClick={useLinkClickHandler({
-          pathname: '/dashboard/category/create'
+          pathname: '/dashboard/categories/create'
         })}
       >
         Create category

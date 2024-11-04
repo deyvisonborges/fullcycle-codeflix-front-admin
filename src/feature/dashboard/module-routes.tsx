@@ -8,8 +8,21 @@ export const DashboardModuleRoutes: RouteObject = {
   children: [
     {
       path: 'categories',
-      element: <div>Categories list</div>,
-      children: [{ path: 'create', element: <CreateCategoryPage /> }]
+      children: [
+        {
+          index: true,
+          element: (
+            <div>
+              Categories list <a href="/dashboard/categories/edit/12">opds</a>
+            </div>
+          )
+        },
+        { path: 'create', element: <CreateCategoryPage /> },
+        {
+          path: 'edit/:id',
+          element: <p>Edit page</p>
+        }
+      ]
     },
     {
       path: '*',
