@@ -1,5 +1,5 @@
-import { store } from '@/store'
-import { ThemeProvider } from '@/styles/theme/theme.provider'
+import { store } from '@/config/store'
+import { ThemeProvider } from '@/config/styles/theme/theme.provider'
 import { render, RenderOptions } from '@testing-library/react'
 import { ReactElement } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'

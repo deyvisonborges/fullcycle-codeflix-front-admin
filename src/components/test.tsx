@@ -1,5 +1,5 @@
 import * as S from './test.styles'
-import { toastActions, useAppDispatch, useAppSelector } from '@/store'
+import { toastActions, useAppDispatch, useAppSelector } from '@/config/store'
 
 export function Test() {
   const dispatch = useAppDispatch()

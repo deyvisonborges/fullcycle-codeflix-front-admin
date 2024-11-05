@@ -1,4 +1,4 @@
-import { DashboardLayout } from '@/styles/layouts/dashboard'
+import { DashboardLayout } from '@/config/styles/layouts/dashboard'
 import { Navigate, RouteObject } from 'react-router-dom'
 import { CreateCategoryPage } from './category/pages/create-category.page'
 

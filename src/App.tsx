@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { Test } from './components/test'
 import styled, { css } from 'styled-components'
-import { useTheme } from './styles/theme/useTheme'
+import { useTheme } from './config/styles/theme/useTheme'
 
 const Container = styled.div`
   ${({ theme }) => css`
