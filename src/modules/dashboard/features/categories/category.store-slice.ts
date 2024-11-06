@@ -1,32 +1,27 @@
 import { CategoryModel as CategoryAPIModel } from '@/integrations/categories'
 import { createSlice } from '@reduxjs/toolkit'
+import { CATEGORIES_MOCK } from './mocks/categories.mock-data'
+import { RootState } from '@/config/store'
 
-const CATEGORY_MOCK: CategoryAPIModel = {
-  id: Date.now().toString(),
-  name: 'Oliver',
-  description: 'Some description type',
-  is_active: true,
-  deleted_at: Date.now().toString(),
-  created_at: Date.now().toString(),
-  updated_at: Date.now().toString()
-}
-
-const CATEGORIES_MOCK: CategoryAPIModel[] = [
-  CATEGORY_MOCK,
-  { ...CATEGORY_MOCK, name: 'Deyvison' },
-  { ...CATEGORY_MOCK, name: 'Bruno' }
-]
-
-type CategorySliceState = {
+type CategoriesSliceState = {
   categories: CategoryAPIModel[]
 }
 
-const initialState: CategorySliceState = {
+const initialState: CategoriesSliceState = {
   categories: CATEGORIES_MOCK
 }
 
-export const categoryStoreSlice = createSlice({
-  name: 'categorySlice',
-  initialState: [],
-  reducers: {}
+export const categoriesSlice = createSlice({
+  name: 'categories',
+  initialState: initialState,
+  reducers: {
+    // createCategory: (state, action) => null,
+    // findAllCategories: (state, action) => null
+    clear: (state) => {
+      state.categories = []
+    }
+  }
 })
+
+export const selectCategories = (state: RootState) => state.categories
+export const { actions: categoriesStoreActions } = categoriesSlice
