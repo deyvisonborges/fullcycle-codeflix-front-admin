@@ -16,12 +16,7 @@ export function FormLayout({
     <S.Container>
       <FormHeader {...headerProps} />
 
-      <S.Form
-        onSubmit={(e) => {
-          e.preventDefault()
-          handleSubmit(e)
-        }}
-      >
+      <S.Form onSubmit={handleSubmit}>
         {children}
         <S.ButtonGroup>
           <S.CancelButton>Cancelar</S.CancelButton>

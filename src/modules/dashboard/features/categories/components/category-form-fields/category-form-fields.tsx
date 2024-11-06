@@ -16,6 +16,7 @@ export function CategoryFormFields({
   data,
   handleChange
 }: CategoryFormFieldsProps) {
+  console.log(data)
   return (
     <>
       <S.InputGroup>
@@ -25,6 +26,7 @@ export function CategoryFormFields({
           name="name"
           placeholder="Nome da categoria"
           value={data.name || ''}
+          label="Nome"
           onChange={handleChange}
         />
         <Input
@@ -33,6 +35,7 @@ export function CategoryFormFields({
           name="description"
           placeholder="Descrição"
           value={data.description || ''}
+          label="Descrição"
           onChange={handleChange}
         />
       </S.InputGroup>
@@ -42,6 +45,8 @@ export function CategoryFormFields({
         type="checkbox"
         name="is_active"
         defaultChecked={data.isActive ?? false}
+        label="Ativo?"
+        onChange={handleChange}
       />
     </>
   )

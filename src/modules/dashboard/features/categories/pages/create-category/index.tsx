@@ -32,7 +32,11 @@ export function CreateCategoryPage() {
   return (
     <FormLayout
       headerProps={{ title: 'Criar uma nova categoria' }}
-      handleSubmit={(e) => console.log('Funcionando...', e)}
+      handleSubmit={(e) => {
+        e.preventDefault()
+        const formData = new FormData(e.target as HTMLFormElement)
+        setCategoryState({ ...categoryState, ...formData })
+      }}
     >
       <CategoryFormFields
         data={categoryModelAdapter(categoryState)}
