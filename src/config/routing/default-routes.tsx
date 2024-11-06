@@ -1,6 +1,6 @@
 import { Navigate, RouteObject } from 'react-router-dom'
-import { DashboardModuleRoutes } from '@/feature/dashboard/module-routes'
-import { AuthModuleRoutes } from '@/feature/auth/module-routes'
+import { DashboardModuleRoutes } from '@/modules/dashboard/dashboard.module-routes'
+import { AuthModuleRoutes } from '@/modules/auth/module-routes'
 
 export const defaultRoutes: RouteObject[] = [
   AuthModuleRoutes,

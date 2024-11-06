@@ -2,11 +2,12 @@ import { DefaultTheme } from 'styled-components'
 import { ThemeMode } from './theme.types'
 
 export const lightTheme: DefaultTheme = {
+  informative: { danger: '#d72c0d' },
   background: {
     default: 'yellow'
   },
   primary: {
-    main: '#111111'
+    main: '#008060'
   },
   secondary: {
     main: '#111111'
@@ -17,11 +18,12 @@ export const lightTheme: DefaultTheme = {
 }
 
 export const darkTheme: DefaultTheme = {
+  informative: { danger: '#d72c0d' },
   background: {
     default: '#222222'
   },
   primary: {
-    main: '#E50914'
+    main: '#008060'
   },
   secondary: {
     main: '#FFFFFF'

@@ -8,7 +8,7 @@ const ResetStyles = createGlobalStyle`
   }
 
   html, body {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Poppins', sans-serif;
     min-height: 100vh;
   }
 

@@ -3,6 +3,7 @@
 import 'styled-components'
 
 type ThemeType = {
+  informative: { danger: string }
   background: {
     default: string
   }

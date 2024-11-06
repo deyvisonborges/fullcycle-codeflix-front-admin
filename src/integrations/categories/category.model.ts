@@ -18,7 +18,7 @@ export type CategoryModel = {
   description: null | string
 }
 
-export function categoryModelAdapter(props: CategoryModel) {
+export function categoryModelAdapter<T>(props: CategoryModel) {
   return {
     ...(props.id && { id: props.id }),
     ...(props.name && { name: props.name }),
@@ -27,5 +27,5 @@ export function categoryModelAdapter(props: CategoryModel) {
     ...(props.created_at && { createdAt: props.created_at }),
     ...(props.updated_at && { updatedAt: props.updated_at }),
     ...(props.description !== undefined && { description: props.description })
-  }
+  } as T
 }
