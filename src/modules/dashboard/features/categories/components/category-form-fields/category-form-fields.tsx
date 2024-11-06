@@ -10,13 +10,16 @@ type CategoryFormFieldsDataProps = Omit<
 type CategoryFormFieldsProps = {
   data: CategoryFormFieldsDataProps
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleToggle: (e: React.ChangeEvent<HTMLInputElement>) => void
+  isDisabled?: boolean
 }
 
 export function CategoryFormFields({
+  isDisabled,
   data,
-  handleChange
+  handleChange,
+  handleToggle
 }: CategoryFormFieldsProps) {
-  console.log(data)
   return (
     <>
       <S.InputGroup>
@@ -27,6 +30,7 @@ export function CategoryFormFields({
           placeholder="Nome da categoria"
           value={data.name || ''}
           label="Nome"
+          disabled={isDisabled}
           onChange={handleChange}
         />
         <Input
@@ -36,6 +40,7 @@ export function CategoryFormFields({
           placeholder="Descrição"
           value={data.description || ''}
           label="Descrição"
+          disabled={isDisabled}
           onChange={handleChange}
         />
       </S.InputGroup>
@@ -46,7 +51,8 @@ export function CategoryFormFields({
         name="is_active"
         defaultChecked={data.isActive ?? false}
         label="Ativo?"
-        onChange={handleChange}
+        disabled={isDisabled}
+        onChange={handleToggle}
       />
     </>
   )
