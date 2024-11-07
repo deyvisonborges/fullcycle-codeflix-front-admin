@@ -6,6 +6,7 @@ import { FormLayout } from '@/modules/dashboard/layout/form'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import { useCategories } from '../../categories.store-hook'
 import { Link } from 'react-router-dom'
+import { enqueueSnackbar } from 'notistack'
 
 export function CreateCategoryPage() {
   const { createCategory } = useCategories()
@@ -20,7 +21,7 @@ export function CreateCategoryPage() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     setIsdisabled(true)
     e.preventDefault()
-    setTimeout(() => setIsdisabled(false), 3000)
+    setTimeout(() => setIsdisabled(false))
     createCategory({
       ...categoryState,
       id: '',
@@ -28,6 +29,7 @@ export function CreateCategoryPage() {
       createdAt: '',
       updatedAt: ''
     })
+    enqueueSnackbar('Adicionado com sucesso', { variant: 'success' })
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

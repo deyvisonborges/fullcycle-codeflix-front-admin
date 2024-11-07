@@ -6,12 +6,15 @@ import { store } from './config/store/store.ts'
 import { ThemeProvider } from './config/styles/theme/theme.provider.tsx'
 import { RouterProvider } from 'react-router-dom'
 import { routes } from './config/routing/index.tsx'
+import { SnackbarProvider } from 'notistack'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ReduxProvider store={store}>
       <ThemeProvider>
-        <RouterProvider router={routes} />
+        <SnackbarProvider>
+          <RouterProvider router={routes} />
+        </SnackbarProvider>
       </ThemeProvider>
     </ReduxProvider>
   </StrictMode>
