@@ -1,15 +1,16 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import {
   CategoryFormFields,
   CategoryFormFieldsDataProps
 } from '../components/category-form-fields'
-import { useCategories } from '../useCategoriesStore'
+import { useCategories } from '../categories.store-hook'
 import { FormLayout } from '@/modules/dashboard/layout/form'
 
 export function EditCategoryPage() {
   const id = useParams().id as string
-  const { findCategoryById } = useCategories()
+
+  const { findCategoryById, updateCategory } = useCategories()
   const [isdisabled, setIsdisabled] = useState(false)
   const [categoryState, setCategoryState] =
     useState<CategoryFormFieldsDataProps>({
@@ -31,6 +32,7 @@ export function EditCategoryPage() {
     const formData = new FormData(e.target as never)
     setCategoryState({ ...categoryState, ...formData })
     setTimeout(() => setIsdisabled(false), 3000)
+    updateCategory({ ...categoryState })
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -58,6 +60,7 @@ export function EditCategoryPage() {
         handleChange={handleChange}
         handleToggle={handleToggle}
       />
+      <Link to="/dashboard/categories">Voltar</Link>
     </FormLayout>
   )
 }

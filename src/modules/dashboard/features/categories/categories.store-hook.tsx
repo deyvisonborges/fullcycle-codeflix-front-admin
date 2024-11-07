@@ -1,15 +1,16 @@
 import { useAppDispatch, useAppSelector } from '@/config/store'
 import {
   categoriesStoreActions,
-  selectCategories
-} from './category.store-slice'
+  categoriesStoreSelectors
+} from './categories.store-slice'
 import { categoryModelAdapter } from '@/integrations/categories'
 import { CategoryUIModel } from './category.ui-model'
 import { useCallback, useMemo } from 'react'
+import { CategoryID } from './category-id.primitive'
 
 export function useCategories() {
   const dispatch = useAppDispatch()
-  const categories = useAppSelector(selectCategories)
+  const categories = useAppSelector(categoriesStoreSelectors.selectCategories)
 
   const adaptedCategories = useMemo(
     () => categories.map((c) => categoryModelAdapter(c)) as CategoryUIModel[],
@@ -33,9 +34,25 @@ export function useCategories() {
     [dispatch]
   )
 
+  const updateCategory = useCallback(
+    (category: Partial<CategoryUIModel>) => {
+      dispatch(categoriesStoreActions.updateCategory(category))
+    },
+    [dispatch]
+  )
+
+  const deleteCategory = useCallback(
+    ({ id }: CategoryID) => {
+      dispatch(categoriesStoreActions.deleteCategory({ id }))
+    },
+    [dispatch]
+  )
+
   return {
     categories: adaptedCategories,
     findCategoryById,
-    createCategory
+    createCategory,
+    updateCategory,
+    deleteCategory
   }
 }

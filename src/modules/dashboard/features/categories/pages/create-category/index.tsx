@@ -4,7 +4,8 @@ import {
 } from '../../components/category-form-fields/category-form-fields'
 import { FormLayout } from '@/modules/dashboard/layout/form'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { useCategories } from '../../useCategoriesStore'
+import { useCategories } from '../../categories.store-hook'
+import { Link } from 'react-router-dom'
 
 export function CreateCategoryPage() {
   const { createCategory } = useCategories()
@@ -50,6 +51,7 @@ export function CreateCategoryPage() {
         handleChange={handleChange}
         handleToggle={handleToggle}
       />
+      <Link to="/dashboard/categories">Voltar</Link>
     </FormLayout>
   )
 }
