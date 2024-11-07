@@ -3,26 +3,18 @@ import {
   categoriesStoreActions,
   categoriesStoreSelectors
 } from './categories.store-slice'
-import { categoryModelAdapter } from '@/integrations/categories'
 import { CategoryUIModel } from './category.ui-model'
-import { useCallback, useMemo } from 'react'
+import { useCallback } from 'react'
 import { CategoryID } from './category-id.primitive'
 
 export function useCategories() {
   const dispatch = useAppDispatch()
   const categories = useAppSelector(categoriesStoreSelectors.selectCategories)
 
-  const adaptedCategories = useMemo(
-    () => categories.map((c) => categoryModelAdapter(c)) as CategoryUIModel[],
-    [categories]
-  )
-
   const findCategoryById = useCallback(
     (id: string) => {
       const category = categories.find((c) => c.id === id)
-      return category
-        ? (categoryModelAdapter(category) as CategoryUIModel)
-        : undefined
+      return category ? category : undefined
     },
     [categories]
   )
@@ -49,7 +41,7 @@ export function useCategories() {
   )
 
   return {
-    categories: adaptedCategories,
+    categories,
     findCategoryById,
     createCategory,
     updateCategory,
