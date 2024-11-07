@@ -19,7 +19,7 @@ export function FormLayout({
       <S.Form onSubmit={handleSubmit}>
         {children}
         <S.ButtonGroup>
-          <S.CancelButton>Cancelar</S.CancelButton>
+          <S.CancelButton type="button">Cancelar</S.CancelButton>
           <S.SaveButton type="submit">Salvar</S.SaveButton>
         </S.ButtonGroup>
       </S.Form>

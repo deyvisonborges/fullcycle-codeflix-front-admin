@@ -5,7 +5,6 @@ import './App.css'
 import { Test } from './components/test'
 import styled, { css } from 'styled-components'
 import { useTheme } from './config/styles/theme/useTheme'
-import { useAppSelector } from './config/store'
 
 const Container = styled.div`
   ${({ theme }) => css`
@@ -16,9 +15,6 @@ const Container = styled.div`
 function App() {
   const [count] = useState(0)
   const { theme, changeTheme } = useTheme()
-  const categories = useAppSelector((state) => state.categories)
-
-  console.log(categories)
 
   return (
     <Container id="OKOKOK">

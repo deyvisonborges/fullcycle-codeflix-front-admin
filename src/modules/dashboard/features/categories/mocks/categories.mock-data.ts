@@ -3,7 +3,7 @@
 import { CategoryModel as CategoryAPIModel } from '@/integrations/categories'
 
 export const CATEGORY_MOCK: CategoryAPIModel = {
-  id: Date.now().toString(),
+  id: '1',
   name: 'Oliver',
   description: 'Some description type',
   is_active: true,
@@ -14,6 +14,6 @@ export const CATEGORY_MOCK: CategoryAPIModel = {
 
 export const CATEGORIES_MOCK: CategoryAPIModel[] = [
   CATEGORY_MOCK,
-  { ...CATEGORY_MOCK, name: 'Deyvison' },
-  { ...CATEGORY_MOCK, name: 'Bruno' }
+  { ...CATEGORY_MOCK, id: '2', name: 'Deyvison' },
+  { ...CATEGORY_MOCK, id: '3', name: 'Bruno' }
 ]

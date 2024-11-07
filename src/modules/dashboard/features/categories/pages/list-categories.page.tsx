@@ -1,4 +1,4 @@
-import { useCategories } from '../useCategories'
+import { useCategories } from '../useCategoriesStore'
 
 export function ListCategoriesPage() {
   const { categories } = useCategories()

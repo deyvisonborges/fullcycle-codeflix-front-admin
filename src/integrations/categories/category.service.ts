@@ -9,4 +9,8 @@ export class CategoryService extends FetchClient {
   async getCategories() {
     return await this.get<CategoryModel>()
   }
+
+  async removeCategoryById(categoryId: string) {
+    return await fetch('' + categoryId, { method: 'DELETE' })
+  }
 }

@@ -2,16 +2,16 @@ import * as S from './category-form-fields.styles'
 import { Input } from '@/components/input'
 import { CategoryUIModel } from '../../category.ui-model'
 
-type CategoryFormFieldsDataProps = Omit<
+export type CategoryFormFieldsDataProps = Pick<
   CategoryUIModel,
-  'id ' | 'deletedAt' | 'createdAt' | 'updatedAt'
+  'name' | 'description' | 'isActive'
 >
 
 type CategoryFormFieldsProps = {
+  isDisabled?: boolean
   data: CategoryFormFieldsDataProps
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   handleToggle: (e: React.ChangeEvent<HTMLInputElement>) => void
-  isDisabled?: boolean
 }
 
 export function CategoryFormFields({
@@ -46,10 +46,10 @@ export function CategoryFormFields({
       </S.InputGroup>
 
       <Input
-        id="is_active"
+        id="isActive"
         type="checkbox"
-        name="is_active"
-        defaultChecked={data.isActive ?? false}
+        name="isActive"
+        checked={data.isActive ?? false}
         label="Ativo?"
         disabled={isDisabled}
         onChange={handleToggle}

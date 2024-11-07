@@ -7,12 +7,13 @@ export const Container = styled.div`
   position: relative;
   width: 100%;
 `
+
 export const Content = styled.div`
   align-items: center;
   display: flex;
   flex-direction: column;
   height: 100%;
-  justify-content: baseline;
+  justify-content: flex-start;
   overflow-y: auto;
   overflow-x: hidden;
   padding: 24px;
