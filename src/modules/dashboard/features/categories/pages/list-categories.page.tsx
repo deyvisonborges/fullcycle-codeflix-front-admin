@@ -1,10 +1,35 @@
 import { useNavigate } from 'react-router-dom'
-import { useCategories } from '../categories.store-hook'
 import { HiPencil, HiTrash } from 'react-icons/hi'
+import {
+  useDeleteCategoryMutation,
+  useGetCategoriesQuery
+  // useGetCategoriesQuery
+} from '../store/slice'
+import { enqueueSnackbar } from 'notistack'
+import { useEffect } from 'react'
+// import { apiSlice } from '@/config/store/slices/api-slice'
 
 export function ListCategoriesPage() {
-  const { categories, deleteCategory } = useCategories()
+  // const { categories, deleteCategory } = useCategoriesStore()
+  const { data } = useGetCategoriesQuery()
+  const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()
+
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (deleteCategoryStatus.error) {
+      enqueueSnackbar('categoria deleta com sucesso', {
+        variant: 'error'
+      })
+    }
+    if (deleteCategoryStatus.isSuccess) {
+      enqueueSnackbar('categoria deleta com sucesso', {
+        variant: 'warning'
+      })
+    }
+  }, [deleteCategoryStatus.error, deleteCategoryStatus.isSuccess])
+
+  if (!data) return null
 
   return (
     <div>
@@ -15,7 +40,7 @@ export function ListCategoriesPage() {
           <th>description</th>
           <th>action</th>
         </tr>
-        {categories.map((category) => (
+        {data.map((category) => (
           <tr>
             <td>{category.id}</td>
             <td>{category.name}</td>
@@ -28,7 +53,7 @@ export function ListCategoriesPage() {
                 }
               />{' '}
               &nbsp;{' '}
-              <HiTrash onClick={() => deleteCategory({ id: category.id })} />{' '}
+              <HiTrash onClick={() => deleteCategory({ id: category.id })} />
               &nbsp;
             </td>
           </tr>

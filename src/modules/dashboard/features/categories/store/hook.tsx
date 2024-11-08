@@ -1,19 +1,16 @@
 import { useAppDispatch, useAppSelector } from '@/config/store'
-import {
-  categoriesStoreActions,
-  categoriesStoreSelectors
-} from './categories.store-slice'
-import { CategoryUIModel } from './category.ui-model'
+import { categoriesStoreActions, categoriesStoreSelectors } from './slice'
+import { CategoryUIModel } from '../category.ui-model'
 import { useCallback } from 'react'
-import { CategoryID } from './category-id.primitive'
+import { CategoryID } from '../category-id.primitive'
 
-export function useCategories() {
+export function useCategoriesStore() {
   const dispatch = useAppDispatch()
   const categories = useAppSelector(categoriesStoreSelectors.selectCategories)
 
   const findCategoryById = useCallback(
     (id: string) => {
-      const category = categories.find((c) => c.id === id)
+      const category = categories.find((c: { id: string }) => c.id === id)
       return category ? category : undefined
     },
     [categories]

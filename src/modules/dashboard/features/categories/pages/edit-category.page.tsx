@@ -4,13 +4,13 @@ import {
   CategoryFormFields,
   CategoryFormFieldsDataProps
 } from '../components/category-form-fields'
-import { useCategories } from '../categories.store-hook'
 import { FormLayout } from '@/modules/dashboard/layout/form'
+import { useCategoriesStore } from '../store/hook'
 
 export function EditCategoryPage() {
   const id = useParams().id as string
 
-  const { findCategoryById, updateCategory } = useCategories()
+  const { findCategoryById, updateCategory } = useCategoriesStore()
   const [isdisabled, setIsdisabled] = useState(false)
   const [categoryState, setCategoryState] =
     useState<CategoryFormFieldsDataProps>({

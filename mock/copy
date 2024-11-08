@@ -1,0 +1,121 @@
+{
+  "categories": [
+    {
+      "id": "4",
+      "name": "Ficção Científica",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-04T10:00:00Z",
+      "updated_at": "2023-01-04T12:00:00Z",
+      "description": "Exploração do universo e tecnologia"
+    },
+    {
+      "id": "6",
+      "name": "Fantasia",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-06T10:00:00Z",
+      "updated_at": "2023-01-06T12:00:00Z",
+      "description": "Mundos mágicos e criaturas fantásticas"
+    },
+    {
+      "id": "7",
+      "name": "Romance",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-07T10:00:00Z",
+      "updated_at": "2023-01-07T12:00:00Z",
+      "description": "Histórias de amor e relacionamentos"
+    },
+    {
+      "id": "8",
+      "name": "Suspense",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-08T10:00:00Z",
+      "updated_at": "2023-01-08T12:00:00Z",
+      "description": "Filmes cheios de mistério e tensão"
+    },
+    {
+      "id": "9",
+      "name": "Documentário",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-09T10:00:00Z",
+      "updated_at": "2023-01-09T12:00:00Z",
+      "description": "Histórias e fatos da vida real"
+    },
+    {
+      "id": "12",
+      "name": "Biografia",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-12T10:00:00Z",
+      "updated_at": "2023-01-12T12:00:00Z",
+      "description": "Histórias de grandes personalidades"
+    },
+    {
+      "id": "13",
+      "name": "Guerra",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-13T10:00:00Z",
+      "updated_at": "2023-01-13T12:00:00Z",
+      "description": "Filmes sobre batalhas e conflitos históricos"
+    },
+    {
+      "id": "14",
+      "name": "Policial",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-14T10:00:00Z",
+      "updated_at": "2023-01-14T12:00:00Z",
+      "description": "Histórias de detetives e investigações"
+    },
+    {
+      "id": "15",
+      "name": "Aventura",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-15T10:00:00Z",
+      "updated_at": "2023-01-15T12:00:00Z",
+      "description": "Filmes de aventuras épicas"
+    },
+    {
+      "id": "16",
+      "name": "Mistério",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-16T10:00:00Z",
+      "updated_at": "2023-01-16T12:00:00Z",
+      "description": "Narrativas cheias de enigmas"
+    },
+    {
+      "id": "17",
+      "name": "Esporte",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-17T10:00:00Z",
+      "updated_at": "2023-01-17T12:00:00Z",
+      "description": "Histórias de atletas e competições"
+    },
+    {
+      "id": "18",
+      "name": "Histórico",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-18T10:00:00Z",
+      "updated_at": "2023-01-18T12:00:00Z",
+      "description": "Filmes baseados em eventos históricos"
+    },
+    {
+      "id": "19",
+      "name": "Western",
+      "deleted_at": null,
+      "is_active": true,
+      "created_at": "2022-01-19T10:00:00Z",
+      "updated_at": "2023-01-19T12:00:00Z",
+      "description": "Histórias ambientadas no velho oeste"
+    }
+  ]
+}
