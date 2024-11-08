@@ -5,13 +5,17 @@ import {
   CategoryFormFieldsDataProps
 } from '../components/category-form-fields'
 import { FormLayout } from '@/modules/dashboard/layout/form'
-import { useCategoriesStore } from '../store/hook'
+import { useGetCategoryQuery, useUpdateCategoryMutation } from '../store/slice'
+import { categoryModelAdapter } from '@/integrations/categories'
+import { useSnackbar } from 'notistack'
+import { convertToApiModel } from '../category.ui-model'
 
 export function EditCategoryPage() {
   const id = useParams().id as string
+  const { data } = useGetCategoryQuery({ id })
 
-  const { findCategoryById, updateCategory } = useCategoriesStore()
   const [isdisabled, setIsdisabled] = useState(false)
+  const [updateCategoryMutation, status] = useUpdateCategoryMutation()
   const [categoryState, setCategoryState] =
     useState<CategoryFormFieldsDataProps>({
       name: '',
@@ -19,20 +23,30 @@ export function EditCategoryPage() {
       description: ''
     })
 
-  useEffect(() => {
-    if (id) {
-      const c = findCategoryById(id)!
-      setCategoryState(c)
-    }
-  }, [findCategoryById, id])
+  const { enqueueSnackbar } = useSnackbar()
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    setIsdisabled(true)
+  useEffect(() => {
+    if (id && data) {
+      setCategoryState(categoryModelAdapter(data))
+    }
+  }, [data, id])
+
+  useEffect(() => {
+    if (status.isSuccess) {
+      enqueueSnackbar('Category updated successfully', { variant: 'success' })
+      setIsdisabled(false)
+    }
+    if (status.error) {
+      enqueueSnackbar('Category not updated', { variant: 'error' })
+    }
+  }, [enqueueSnackbar, status.error, status.isSuccess])
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formData = new FormData(e.target as never)
-    setCategoryState({ ...categoryState, ...formData })
-    setTimeout(() => setIsdisabled(false), 3000)
-    updateCategory({ ...categoryState })
+    await updateCategoryMutation({
+      id: id,
+      payload: convertToApiModel(categoryState)
+    })
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +62,8 @@ export function EditCategoryPage() {
   if (!categoryState) {
     return <p>Not found category with id {id}</p>
   }
+
+  if (!data) return null
 
   return (
     <FormLayout

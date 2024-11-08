@@ -4,12 +4,13 @@ import {
 } from '../../components/category-form-fields/category-form-fields'
 import { FormLayout } from '@/modules/dashboard/layout/form'
 import { ChangeEvent, FormEvent, useState } from 'react'
-import { useCategoriesStore } from '../../store/hook'
 import { Link } from 'react-router-dom'
 import { enqueueSnackbar } from 'notistack'
+import { useCreateCategoryMutation } from '../../store/slice'
+import { convertToApiModel } from '../../category.ui-model'
 
 export function CreateCategoryPage() {
-  const { createCategory } = useCategoriesStore()
+  const [createCategoryMutation] = useCreateCategoryMutation()
   const [isdisabled, setIsdisabled] = useState(false)
   const [categoryState, setCategoryState] =
     useState<CategoryFormFieldsDataProps>({
@@ -18,17 +19,10 @@ export function CreateCategoryPage() {
       description: ''
     })
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsdisabled(true)
     e.preventDefault()
-    setTimeout(() => setIsdisabled(false))
-    createCategory({
-      ...categoryState,
-      id: '',
-      deletedAt: '',
-      createdAt: '',
-      updatedAt: ''
-    })
+    await createCategoryMutation(convertToApiModel(categoryState))
     enqueueSnackbar('Adicionado com sucesso', { variant: 'success' })
   }
 

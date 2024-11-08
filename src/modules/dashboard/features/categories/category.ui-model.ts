@@ -2,7 +2,7 @@ import { CamelCase, CategoryModel } from '@/integrations/categories'
 
 export type CategoryUIModel = CamelCase<CategoryModel>
 
-export function convertToApiModel<T>(props: CategoryUIModel) {
+export function convertToApiModel<T>(props: Partial<CategoryUIModel>) {
   return {
     ...(props.id && { id: props.id }),
     ...(props.name && { name: props.name }),

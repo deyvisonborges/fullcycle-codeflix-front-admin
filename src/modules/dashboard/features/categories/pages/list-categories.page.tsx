@@ -3,7 +3,6 @@ import { HiPencil, HiTrash } from 'react-icons/hi'
 import {
   useDeleteCategoryMutation,
   useGetCategoriesQuery
-  // useGetCategoriesQuery
 } from '../store/slice'
 import { enqueueSnackbar } from 'notistack'
 import { useEffect } from 'react'
