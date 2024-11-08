@@ -6,57 +6,63 @@ import {
 } from '../store/slice'
 import { enqueueSnackbar } from 'notistack'
 import { useEffect } from 'react'
-// import { apiSlice } from '@/config/store/slices/api-slice'
 
 export function ListCategoriesPage() {
-  // const { categories, deleteCategory } = useCategoriesStore()
-  const { data } = useGetCategoriesQuery()
-  const [deleteCategory, deleteCategoryStatus] = useDeleteCategoryMutation()
+  const { data, isError, status } = useGetCategoriesQuery()
+  const [deleteCategory, { error: deleteError, isSuccess: deleteSuccess }] =
+    useDeleteCategoryMutation()
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (deleteCategoryStatus.error) {
-      enqueueSnackbar('categoria deleta com sucesso', {
+    if (deleteError) {
+      enqueueSnackbar('Erro ao deletar categoria', {
         variant: 'error'
       })
     }
-    if (deleteCategoryStatus.isSuccess) {
-      enqueueSnackbar('categoria deleta com sucesso', {
-        variant: 'warning'
+    if (deleteSuccess) {
+      enqueueSnackbar('Categoria deletada com sucesso', {
+        variant: 'success'
       })
     }
-  }, [deleteCategoryStatus.error, deleteCategoryStatus.isSuccess])
+  }, [deleteError, deleteSuccess])
 
-  if (!data) return null
+  // Exibe mensagem de erro ao listar categorias caso o serviço esteja indisponível
+  if (isError || status === 'rejected') {
+    return <p>Erro ao listar as categorias. Tente novamente mais tarde.</p>
+  }
+
+  if (!data) return <p>Carregando...</p>
 
   return (
     <div>
       <table border={1}>
-        <tr>
-          <th>id</th>
-          <th>name</th>
-          <th>description</th>
-          <th>action</th>
-        </tr>
-        {data.map((category) => (
+        <thead>
           <tr>
-            <td>{category.id}</td>
-            <td>{category.name}</td>
-            <td>{category.description}</td>
-            <td>
-              &nbsp;{' '}
-              <HiPencil
-                onClick={() =>
-                  navigate('/dashboard/categories/edit/' + category.id)
-                }
-              />{' '}
-              &nbsp;{' '}
-              <HiTrash onClick={() => deleteCategory({ id: category.id })} />
-              &nbsp;
-            </td>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Ações</th>
           </tr>
-        ))}
+        </thead>
+        <tbody>
+          {data.map((category) => (
+            <tr key={category.id}>
+              <td>{category.id}</td>
+              <td>{category.name}</td>
+              <td>{category.description}</td>
+              <td>
+                <HiPencil
+                  onClick={() =>
+                    navigate(`/dashboard/categories/edit/${category.id}`)
+                  }
+                />
+                &nbsp;
+                <HiTrash onClick={() => deleteCategory({ id: category.id })} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   )
