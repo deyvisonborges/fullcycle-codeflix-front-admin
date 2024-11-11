@@ -1,6 +1,6 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
-import { categoriesApiSlice } from '@/modules/dashboard/features/categories/store/slice'
+import { categoriesApiSlice } from '@/modules/admin/features/categories/store/slice'
 import { apiSlice } from './slices/api-slice'
 
 export const store = configureStore({

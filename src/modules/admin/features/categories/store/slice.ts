@@ -1,6 +1,7 @@
 import { CategoryModel as CategoryAPIModel } from '@/integrations/categories'
 import { CategoryID } from '../category-id.primitive'
 import { apiSlice } from '@/config/store/slices/api-slice'
+import { paginationParser } from '@/utils/paginationParser'
 
 const endpoint = '/categories'
 
@@ -16,6 +17,13 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
     getCategories: query<CategoryAPIModel[], void>({
       query: () => `${endpoint}`,
+      providesTags: ['Categories']
+    }),
+    getPaginatedCategories: query<
+      CategoryAPIModel[],
+      { page: number; perPage: number }
+    >({
+      query: getPaginatedCategories,
       providesTags: ['Categories']
     }),
     getCategory: query<CategoryAPIModel, CategoryID>({
@@ -47,6 +55,11 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     })
   })
 })
+
+const getPaginatedCategories = (page: 1, perPage: 10) => {
+  const params = { page, perPage }
+  return `${endpoint}?${paginationParser({ ...params })}`
+}
 
 export const {
   useGetCategoriesQuery,

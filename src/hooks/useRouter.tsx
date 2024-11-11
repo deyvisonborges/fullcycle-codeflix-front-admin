@@ -1,26 +1,24 @@
 import { useCallback, useMemo } from 'react'
-import {
-  useParams,
-  useLocation,
-  useHistory,
-  useRouteMatch
-} from 'react-router-dom'
+import { useParams, useLocation, useNavigate, useMatch } from 'react-router-dom'
 
 export function useRouter<T>() {
-  const history = useHistory()
-  const location = useLocation<T>()
-  const match = useRouteMatch()
-  const params = useParams()
+  const navigate = useNavigate()
+  const location = useLocation()
+  const params = useParams<T>()
 
-  const handleGoBack = useCallback(() => history.goBack(), [history])
+  // No React Router 6, `useMatch` substitui `useRouteMatch`.
+  // Ele permite passar um padrão para ver se a URL atual corresponde.
+  const match = useMatch('/:path*')
+
+  const handleGoBack = useCallback((path: string) => navigate(path), [navigate])
 
   return useMemo(() => {
     return {
-      history,
+      navigate,
       location,
       match,
       params,
       handleGoBack
     }
-  }, [history, location, match, params, handleGoBack])
+  }, [navigate, location, match, params, handleGoBack])
 }

@@ -4,7 +4,7 @@ import {
   CategoryFormFields,
   CategoryFormFieldsDataProps
 } from '../components/category-form-fields'
-import { FormLayout } from '@/modules/dashboard/layout/form'
+import { FormLayout } from '@/modules/admin/layout/form'
 import { useGetCategoryQuery, useUpdateCategoryMutation } from '../store/slice'
 import { categoryModelAdapter } from '@/integrations/categories'
 import { useSnackbar } from 'notistack'
