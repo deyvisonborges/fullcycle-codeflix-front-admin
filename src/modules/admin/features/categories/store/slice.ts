@@ -1,7 +1,10 @@
 import { CategoryModel as CategoryAPIModel } from '@/integrations/categories'
 import { CategoryID } from '../category-id.primitive'
 import { apiSlice } from '@/config/store/slices/api-slice'
-import { paginationParser } from '@/utils/paginationParser'
+import {
+  PageBasedPaginationQuery,
+  PageBasedPaginationResponse
+} from '@/integrations/page-based-pagination'
 
 const endpoint = '/categories'
 
@@ -13,6 +16,13 @@ type UpInsertCategoryCommand = Partial<
 
 type UpdateCategoryCommand = { payload: UpInsertCategoryCommand } & CategoryID
 
+const createPageBasedPaginationQuery = (params: PageBasedPaginationQuery) => {
+  const query = new URLSearchParams()
+  if (params.page) query.append('page', params.page.toString())
+  if (params.per_page) query.append('per_page', params.per_page.toString())
+  return query.toString()
+}
+
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
     getCategories: query<CategoryAPIModel[], void>({
@@ -20,14 +30,15 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
       providesTags: ['Categories']
     }),
     getPaginatedCategories: query<
-      CategoryAPIModel[],
-      { page: number; perPage: number }
+      PageBasedPaginationResponse<CategoryAPIModel[]>,
+      Partial<PageBasedPaginationQuery>
     >({
-      query: getPaginatedCategories,
+      query: (params: PageBasedPaginationQuery) =>
+        `${endpoint}?${createPageBasedPaginationQuery(params)}`,
       providesTags: ['Categories']
     }),
     getCategory: query<CategoryAPIModel, CategoryID>({
-      query: ({ id }: CategoryID) => `${endpoint}/${id}`,
+      query: ({ id }: CategoryID) => `${endpoint}?${id}`,
       providesTags: ['Categories']
     }),
     createCategory: mutation<void, UpInsertCategoryCommand>({
@@ -56,13 +67,9 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
   })
 })
 
-const getPaginatedCategories = (page: 1, perPage: 10) => {
-  const params = { page, perPage }
-  return `${endpoint}?${paginationParser({ ...params })}`
-}
-
 export const {
   useGetCategoriesQuery,
+  useGetPaginatedCategoriesQuery,
   useGetCategoryQuery,
   useCreateCategoryMutation,
   useUpdateCategoryMutation,

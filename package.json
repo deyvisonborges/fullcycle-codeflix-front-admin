@@ -15,7 +15,8 @@
     "test:watch": "jest --watch --maxWorkers=25%",
     "test:cover": "npm run test --coverage --watchAll=false",
     "test:report": "open-cli ./coverage/lcov-report/index.html",
-    "mock-server": "json-server --watch ./mock/categories.json --port 4000"
+    "mock-server": "json-server --watch ./mock/categories.json --port 4000",
+    "mock-server": "json-server --watch ./mock/pagination.json --port 4000"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.3.0",
