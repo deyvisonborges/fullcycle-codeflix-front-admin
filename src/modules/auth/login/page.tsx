@@ -1,7 +1,7 @@
 import { usePageBasedPagination } from '@/hooks/usePageBasedPagination'
 import { CategoryModel } from '@/integrations/categories'
 import { useGetPaginatedCategoriesQuery } from '@/modules/admin/features/categories/store/slice'
-import { useDeferredValue, useEffect, useState } from 'react'
+import { Suspense, useDeferredValue, useEffect, useState } from 'react'
 
 export const LoginPage = () => {
   const [search, setSearch] = useState('')
@@ -23,6 +23,7 @@ export const LoginPage = () => {
     itemsPerPage // Configure para 2 itens por página
   })
 
+  //WIP: criar um set data o use page based pagination pois quando eu faco os filtros, a paginacao fica certa, porem algunas paginas ficam vazias
   const { data } = useGetPaginatedCategoriesQuery({
     page: currentPage,
     per_page: itemsPerPage
@@ -65,11 +66,13 @@ export const LoginPage = () => {
         </select>
       </div>
       <h1>Exemplo de Paginação</h1>
-      <ul>
-        {filteredData.map((item) => (
-          <li key={item.id}>{item.name}</li>
-        ))}
-      </ul>
+      <Suspense fallback={<p>Loading...</p>}>
+        <ul>
+          {filteredData.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+      </Suspense>
 
       <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
         <button onClick={() => goToPage(1)} disabled={currentPage === 1}>
