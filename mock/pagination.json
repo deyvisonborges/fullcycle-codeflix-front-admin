@@ -4,7 +4,7 @@
         "id": "12",
         "name": "Biografia",
         "deleted_at": null,
-        "is_active": true,
+        "is_active": false,
         "created_at": "2022-01-12T10:00:00Z",
         "updated_at": "2023-01-12T12:00:00Z",
         "description": "Histórias de grandes personalidades"
@@ -20,7 +20,7 @@
         "id": "15",
         "name": "Aventura",
         "deleted_at": null,
-        "is_active": true,
+        "is_active": false,
         "created_at": "2022-01-15T10:00:00Z",
         "updated_at": "2023-01-15T12:00:00Z",
         "description": "Filmes de aventuras épicas"
