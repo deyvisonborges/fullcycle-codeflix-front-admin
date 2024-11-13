@@ -8,6 +8,7 @@ import {
 
 const endpoint = '/categories'
 
+// WIP: remove duplications
 type ReadonlyAttributes = 'id' | 'created_at' | 'updated_at' | 'deleted_at'
 
 type UpInsertCategoryCommand = Partial<
@@ -38,7 +39,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
       providesTags: ['Categories']
     }),
     getCategory: query<CategoryAPIModel, CategoryID>({
-      query: ({ id }: CategoryID) => `${endpoint}?${id}`,
+      query: ({ id }: CategoryID) => `${endpoint}/${id}`,
       providesTags: ['Categories']
     }),
     createCategory: mutation<void, UpInsertCategoryCommand>({
