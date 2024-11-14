@@ -6,7 +6,7 @@ import { Provider as ReduxProvider } from 'react-redux'
 
 type CustomRenderProps = Omit<RenderOptions, 'queries'>
 
-export const renderWithTheme = (
+export const renderWithProviders = (
   ui: ReactElement,
   { ...renderOptions }: CustomRenderProps
 ) => {

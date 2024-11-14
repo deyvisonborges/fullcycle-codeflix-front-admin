@@ -1,6 +1,10 @@
 export default {
   collectCoverage: true,
-  collectCoverageFrom: ['src/**/*.(spec|test).ts(x)?', '!src/**/stories.tsx'],
+  collectCoverageFrom: [
+    '!src/**/*.spec.{ts,tsx}',
+    '!src/**/*.test.{ts,tsx}',
+    '!src/**/stories.tsx'
+  ],
   testEnvironment: 'jest-environment-jsdom',
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
   moduleNameMapper: {

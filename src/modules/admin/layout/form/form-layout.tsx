@@ -5,12 +5,16 @@ import { FormEvent, PropsWithChildren } from 'react'
 type FormLayoutProps = {
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void
   headerProps: FormHeaderProps
+  isDisabled?: boolean
+  isLoading?: boolean
 } & PropsWithChildren
 
 export function FormLayout({
   children,
   headerProps,
-  handleSubmit
+  handleSubmit,
+  isDisabled,
+  isLoading
 }: FormLayoutProps) {
   return (
     <S.Container>
@@ -20,7 +24,9 @@ export function FormLayout({
         {children}
         <S.ButtonGroup>
           <S.CancelButton type="button">Cancelar</S.CancelButton>
-          <S.SaveButton type="submit">Salvar</S.SaveButton>
+          <S.SaveButton disabled={isDisabled || isLoading} type="submit">
+            {isLoading ? 'Salvando' : 'Salvar'}
+          </S.SaveButton>
         </S.ButtonGroup>
       </S.Form>
 

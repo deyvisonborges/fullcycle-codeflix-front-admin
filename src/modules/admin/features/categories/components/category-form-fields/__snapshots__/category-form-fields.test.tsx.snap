@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CategoryFormFields should render category form fields correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-blHHSb blRQuv"
+  >
+    <div
+      class="sc-gtLWhw kFIqRo"
+    >
+      <label
+        class="sc-fAUdSK kTGwm"
+        for="name"
+      >
+        Nome
+      </label>
+      <input
+        class="sc-egkSDF emYusT"
+        disabled=""
+        id="name"
+        name="name"
+        placeholder="Nome da categoria"
+        type="text"
+        value="mock name"
+      />
+    </div>
+    <div
+      class="sc-gtLWhw kFIqRo"
+    >
+      <label
+        class="sc-fAUdSK kTGwm"
+        for="description"
+      >
+        Descrição
+      </label>
+      <input
+        class="sc-egkSDF emYusT"
+        disabled=""
+        id="description"
+        name="description"
+        placeholder="Descrição"
+        type="text"
+        value="some mock description"
+      />
+    </div>
+  </div>
+  <div
+    class="sc-gtLWhw kFIqRo"
+  >
+    <label
+      class="sc-fAUdSK kTGwm"
+      for="isActive"
+    >
+      Ativo?
+    </label>
+    <input
+      checked=""
+      class="sc-egkSDF emYusT"
+      disabled=""
+      id="isActive"
+      name="isActive"
+      type="checkbox"
+    />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CategoryFormFields should render category from with disabled state 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-blHHSb blRQuv"
+  >
+    <div
+      class="sc-gtLWhw kFIqRo"
+    >
+      <label
+        class="sc-fAUdSK kTGwm"
+        for="name"
+      >
+        Nome
+      </label>
+      <input
+        class="sc-egkSDF emYusT"
+        disabled=""
+        id="name"
+        name="name"
+        placeholder="Nome da categoria"
+        type="text"
+        value="mock name"
+      />
+    </div>
+    <div
+      class="sc-gtLWhw kFIqRo"
+    >
+      <label
+        class="sc-fAUdSK kTGwm"
+        for="description"
+      >
+        Descrição
+      </label>
+      <input
+        class="sc-egkSDF emYusT"
+        disabled=""
+        id="description"
+        name="description"
+        placeholder="Descrição"
+        type="text"
+        value="some mock description"
+      />
+    </div>
+  </div>
+  <div
+    class="sc-gtLWhw kFIqRo"
+  >
+    <label
+      class="sc-fAUdSK kTGwm"
+      for="isActive"
+    >
+      Ativo?
+    </label>
+    <input
+      checked=""
+      class="sc-egkSDF emYusT"
+      disabled=""
+      id="isActive"
+      name="isActive"
+      type="checkbox"
+    />
+  </div>
+</DocumentFragment>
+`;
