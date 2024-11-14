@@ -46,11 +46,13 @@ export function ListCategoriesPage() {
           </tr>
         </thead>
         <tbody>
+          {/* refect */}
           {data.map((category) => (
             <tr key={category.id}>
               <td>{category.id}</td>
               <td>{category.name}</td>
               <td>{category.description}</td>
+              <td>{category.is_active ? 'ativo' : 'inativo'}</td>
               <td>
                 <HiPencil
                   onClick={() =>

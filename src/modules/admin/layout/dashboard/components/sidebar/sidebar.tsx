@@ -1,4 +1,4 @@
-import { useLinkClickHandler } from 'react-router-dom'
+import { Link, useLinkClickHandler } from 'react-router-dom'
 import * as S from './sidebar.styles'
 
 export function Sidebar() {
@@ -11,6 +11,7 @@ export function Sidebar() {
       >
         Create category
       </p>
+      <Link to="/dashboard/cast-members">cast members</Link>
     </S.Container>
   )
 }

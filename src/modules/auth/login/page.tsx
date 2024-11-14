@@ -43,7 +43,7 @@ export const LoginPage = () => {
   })
 
   useEffect(() => {
-    if (data) setCategories(data?.data.flat()) // `data.data` contém o array direto de `CategoryModel`
+    if (data) setCategories(data) // `data.data` contém o array direto de `CategoryModel`
   }, [data])
 
   return (

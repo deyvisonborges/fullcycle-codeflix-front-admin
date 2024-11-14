@@ -64,7 +64,7 @@ export function LisCastMembersPage() {
               <td>
                 <HiPencil
                   onClick={() =>
-                    navigate(`/dashboard/cast-member/edit/${castMember.id}`)
+                    navigate(`/dashboard/cast-members/edit/${castMember.id}`)
                   }
                 />
                 &nbsp;

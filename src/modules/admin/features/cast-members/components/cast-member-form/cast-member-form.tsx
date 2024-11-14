@@ -25,7 +25,7 @@ export function CastMemberForm({
         id="name"
         type="text"
         name="name"
-        placeholder="Nome da categoria"
+        placeholder="Nome do membro"
         value={data.name || ''}
         label="Nome"
         disabled={isDisabled}
@@ -35,7 +35,7 @@ export function CastMemberForm({
         id="type"
         type="text"
         name="type"
-        placeholder="Descrição"
+        placeholder="Tipo"
         value={data.type || ''}
         label="Tipo"
         disabled={isDisabled}

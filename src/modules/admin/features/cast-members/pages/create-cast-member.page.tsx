@@ -1,5 +1,5 @@
 import { FormLayout } from '@/modules/admin/layout/form'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { enqueueSnackbar } from 'notistack'
 import {
@@ -10,7 +10,7 @@ import { useCreateCastMemberMutation } from '../api/cast-member.service'
 import { convertToApiModel } from '../cast-member.ui-model'
 
 export function CreateCastMemberPage() {
-  const [createCastMemberMutation] = useCreateCastMemberMutation()
+  const [createCastMemberMutation, status] = useCreateCastMemberMutation()
   const [isdisabled, setIsdisabled] = useState(false)
   const [castMemberState, setCastMemberState] =
     useState<CastMemberFormFieldsProps>({
@@ -18,11 +18,17 @@ export function CreateCastMemberPage() {
       type: 0
     })
 
+  useEffect(() => {
+    if (status.isError) {
+      enqueueSnackbar('Erro ao criar membro', { variant: 'error' })
+    }
+  }, [status.error, status.isError])
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsdisabled(true)
     e.preventDefault()
+    console.log(castMemberState)
     await createCastMemberMutation(convertToApiModel(castMemberState))
-    enqueueSnackbar('Adicionado com sucesso', { variant: 'success' })
   }
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +38,7 @@ export function CreateCastMemberPage() {
 
   return (
     <FormLayout
-      headerProps={{ title: 'Criar uma nova categoria' }}
+      headerProps={{ title: 'Criar um membro do elenco' }}
       handleSubmit={handleSubmit}
     >
       <CastMemberForm
@@ -40,7 +46,7 @@ export function CreateCastMemberPage() {
         isDisabled={isdisabled}
         handleChange={handleChange}
       />
-      <Link to="/dashboard/categories">Voltar</Link>
+      <Link to="/dashboard/cast-members">Voltar</Link>
     </FormLayout>
   )
 }
