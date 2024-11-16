@@ -1,0 +1,128 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateCategoryPage renders correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-ixGGxD oiJVB"
+  >
+    <div
+      class="sc-dntaoT clyXwj"
+      id="form__header"
+    >
+      <div
+        class="sc-ghWlax jzNQHp"
+      >
+        <i
+          class="sc-ivxoEo eHFMCT"
+        >
+          <svg
+            aria-hidden="true"
+            fill="currentColor"
+            height="1em"
+            stroke="currentColor"
+            stroke-width="0"
+            viewBox="0 0 20 20"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              clip-rule="evenodd"
+              d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+              fill-rule="evenodd"
+            />
+          </svg>
+        </i>
+        <h2
+          class="sc-kLhKbu daeWQb"
+        >
+          Criar uma nova categoria
+        </h2>
+      </div>
+    </div>
+    <form
+      class="sc-khLCKb hQCKRV"
+    >
+      <div
+        class="sc-blHHSb blRQuv"
+      >
+        <div
+          class="sc-gtLWhw kFIqRo"
+        >
+          <label
+            class="sc-fAUdSK kTGwm"
+            for="name"
+          >
+            Nome
+          </label>
+          <input
+            class="sc-egkSDF emYusT"
+            id="name"
+            name="name"
+            placeholder="Nome da categoria"
+            type="text"
+            value=""
+          />
+        </div>
+        <div
+          class="sc-gtLWhw kFIqRo"
+        >
+          <label
+            class="sc-fAUdSK kTGwm"
+            for="description"
+          >
+            Descrição
+          </label>
+          <input
+            class="sc-egkSDF emYusT"
+            id="description"
+            name="description"
+            placeholder="Descrição"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+      <div
+        class="sc-gtLWhw kFIqRo"
+      >
+        <label
+          class="sc-fAUdSK kTGwm"
+          for="isActive"
+        >
+          Ativo?
+        </label>
+        <input
+          class="sc-egkSDF emYusT"
+          id="isActive"
+          name="isActive"
+          type="checkbox"
+        />
+      </div>
+      <a
+        href="/dashboard/categories"
+      >
+        Voltar
+      </a>
+      <div
+        class="sc-dstKZu iccvyj"
+      >
+        <button
+          class="sc-keTIit eEoIei"
+          type="button"
+        >
+          Cancelar
+        </button>
+        <button
+          class="sc-dpBQxM bLsGbw"
+          type="submit"
+        >
+          Salvar
+        </button>
+      </div>
+    </form>
+    <footer
+      class="sc-jwIPbr bLrzYG"
+    />
+  </div>
+</DocumentFragment>
+`;
