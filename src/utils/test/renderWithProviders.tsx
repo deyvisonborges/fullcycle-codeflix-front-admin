@@ -1,33 +1,45 @@
-import { apiSlice } from '@/config/store/slices/api-slice'
-import { categoriesApiSlice } from '@/modules/admin/features/categories/store/slice'
-import { Provider as ReduxProvider } from 'react-redux'
-import { configureStore } from '@reduxjs/toolkit'
+import { ReactElement, PropsWithChildren } from 'react'
 import { render, RenderOptions } from '@testing-library/react'
-import { ReactElement } from 'react'
+import { configureStore } from '@reduxjs/toolkit'
+import { Provider as ReduxProvider } from 'react-redux'
 import { ThemeProvider } from '@/config/styles/theme/theme.provider'
 import { SnackbarProvider } from 'notistack'
+import { BrowserRouter } from 'react-router-dom'
+import { apiSlice } from '@/config/store/slices/api-slice'
+import { categoriesApiSlice } from '@/modules/admin/features/categories/store/slice'
+
+type ProvidersProps = {
+  store?: ReturnType<typeof configureStore>
+} & PropsWithChildren
+
+// eslint-disable-next-line react-refresh/only-export-components
+const Providers = ({ children, store }: ProvidersProps) => {
+  const defaultStore = configureStore({
+    reducer: {
+      [categoriesApiSlice.reducerPath]: apiSlice.reducer
+    }
+  })
+
+  return (
+    <ReduxProvider store={store || defaultStore}>
+      <BrowserRouter>
+        <ThemeProvider>
+          <SnackbarProvider>{children}</SnackbarProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </ReduxProvider>
+  )
+}
 
 type CustomRenderProps = Omit<RenderOptions, 'queries'> & {
   store?: ReturnType<typeof configureStore>
 }
 
-export const renderWithProviders = (
-  ui: ReactElement,
-  {
-    store = configureStore({
-      reducer: {
-        [categoriesApiSlice.reducerPath]: apiSlice.reducer
-      }
-    }),
-    ...renderOptions
-  }: CustomRenderProps
-) => {
-  return render(
-    <ReduxProvider store={store}>
-      <ThemeProvider>
-        <SnackbarProvider>{ui}</SnackbarProvider>
-      </ThemeProvider>
-    </ReduxProvider>,
-    renderOptions
-  )
+const customRender = (ui: ReactElement, options?: CustomRenderProps) => {
+  return render(ui, {
+    wrapper: (props) => <Providers store={options?.store} {...props} />,
+    ...options
+  })
 }
+
+export { customRender as renderWithProviders }
