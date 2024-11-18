@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListCategoriesPage renders correctly 1`] = `
+<DocumentFragment>
+  <p>
+    Carregando...
+  </p>
+</DocumentFragment>
+`;

@@ -7,10 +7,13 @@ import { SnackbarProvider } from 'notistack'
 import { BrowserRouter } from 'react-router-dom'
 import { apiSlice } from '@/config/store/slices/api-slice'
 import { categoriesApiSlice } from '@/modules/admin/features/categories/store/slice'
+import { store } from '@/config/store'
 
 type ProvidersProps = {
   store?: ReturnType<typeof configureStore>
 } & PropsWithChildren
+
+const rootTmpStore = store
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Providers = ({ children, store }: ProvidersProps) => {
@@ -21,7 +24,7 @@ const Providers = ({ children, store }: ProvidersProps) => {
   })
 
   return (
-    <ReduxProvider store={store || defaultStore}>
+    <ReduxProvider store={rootTmpStore || store || defaultStore}>
       <BrowserRouter>
         <ThemeProvider>
           <SnackbarProvider>{children}</SnackbarProvider>

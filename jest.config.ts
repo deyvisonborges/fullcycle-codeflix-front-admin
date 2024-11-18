@@ -5,7 +5,10 @@ export default {
     '!src/**/*.test.{ts,tsx}',
     '!src/**/stories.tsx'
   ],
-  testEnvironment: 'jest-environment-jsdom',
+  testEnvironment: 'jest-fixed-jsdom',
+  testEnvironmentOptions: {
+    customExportConditions: ['']
+  },
   testPathIgnorePatterns: ['/node_modules/', '/.next/'],
   moduleNameMapper: {
     '@/(.*)': '<rootDir>/src/$1',

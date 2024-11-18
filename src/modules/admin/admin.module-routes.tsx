@@ -1,5 +1,5 @@
 import { Navigate, RouteObject } from 'react-router-dom'
-import { categoryRoutes } from './features/categories/category.feature-routes'
+import { categoryRoutes } from './features/categories/categories.routes'
 import { DashboardLayout } from './layout/dashboard'
 import { castMembersRoutes } from './features/cast-members/routes'
 
