@@ -52,12 +52,6 @@ describe('CategoryFormFields', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  // it('should render passed valus by props', () => {
-  //   const {} = renderWithProviders(
-  //     <CategoryFormFields data={data} {...mockProps} />
-  //   )
-  // })
-
   it('should execute handle change when inputs change', () => {
     const mockHandleChange = jest.fn((e) => {
       const { name, value } = e.target
