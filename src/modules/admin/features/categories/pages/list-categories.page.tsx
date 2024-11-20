@@ -5,7 +5,8 @@ import {
   useGetCategoriesQuery
 } from '../store/slice'
 import { enqueueSnackbar } from 'notistack'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { CategoryAPIModel } from '../api/models/category.model'
 
 export function ListCategoriesPage() {
   const { data, isError, status } = useGetCategoriesQuery()
@@ -13,6 +14,12 @@ export function ListCategoriesPage() {
     useDeleteCategoryMutation()
 
   const navigate = useNavigate()
+
+  const [categories, setCategories] = useState<CategoryAPIModel[]>([])
+
+  useEffect(() => {
+    if (data) setCategories(data.data.flat())
+  }, [data])
 
   useEffect(() => {
     if (deleteError) {
@@ -47,7 +54,7 @@ export function ListCategoriesPage() {
         </thead>
         <tbody>
           {/* refect */}
-          {data.map((category) => (
+          {categories.map((category) => (
             <tr key={category.id}>
               <td>{category.id}</td>
               <td>{category.name}</td>
