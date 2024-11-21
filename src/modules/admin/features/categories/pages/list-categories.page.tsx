@@ -31,7 +31,9 @@ export function ListCategoriesPage() {
   }, [deleteError, deleteSuccess])
 
   useEffect(() => {
-    if (data) setCategories(data.data.flat())
+    if (data) {
+      setCategories(data.data.flat())
+    }
   }, [data])
 
   if (error) {
