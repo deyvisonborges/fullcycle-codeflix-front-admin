@@ -9,17 +9,13 @@ import { useEffect, useState } from 'react'
 import { CategoryAPIModel } from '../api/models/category.model'
 
 export function ListCategoriesPage() {
-  const { data, isError, status } = useGetCategoriesQuery()
+  const { data, isError, status, error } = useGetCategoriesQuery()
   const [deleteCategory, { error: deleteError, isSuccess: deleteSuccess }] =
     useDeleteCategoryMutation()
 
   const navigate = useNavigate()
 
   const [categories, setCategories] = useState<CategoryAPIModel[]>([])
-
-  useEffect(() => {
-    if (data) setCategories(data.data.flat())
-  }, [data])
 
   useEffect(() => {
     if (deleteError) {
@@ -34,8 +30,16 @@ export function ListCategoriesPage() {
     }
   }, [deleteError, deleteSuccess])
 
+  useEffect(() => {
+    if (data) setCategories(data.data.flat())
+  }, [data])
+
+  if (error) {
+    return <div>Erro ao listar as categorias</div>
+  }
+
   // Exibe mensagem de erro ao listar categorias caso o serviço esteja indisponível
-  if (isError || status === 'rejected') {
+  if (error || isError || status === 'rejected') {
     return <p>Erro ao listar as categorias. Tente novamente mais tarde.</p>
   }
 
