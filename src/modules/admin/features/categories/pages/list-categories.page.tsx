@@ -31,17 +31,12 @@ export function ListCategoriesPage() {
   }, [deleteError, deleteSuccess])
 
   useEffect(() => {
-    if (data) {
-      setCategories(data.data.flat())
-    }
+    if (data) setCategories(data.data.flat())
   }, [data])
-
-  if (error) {
-    return <div>Erro ao listar as categorias</div>
-  }
+  console.log(error, isError, data)
 
   // Exibe mensagem de erro ao listar categorias caso o serviço esteja indisponível
-  if (error || isError || status === 'rejected') {
+  if (isError || status === 'rejected') {
     return <p>Erro ao listar as categorias. Tente novamente mais tarde.</p>
   }
 

@@ -5,6 +5,9 @@ export default {
     '!src/**/*.test.{ts,tsx}',
     '!src/**/stories.tsx'
   ],
+
+  // The test environment that will be used for testing
+  // https://mswjs.io/docs/faq/#requestresponsetextencoder-is-not-defined-jest
   testEnvironment: 'jest-fixed-jsdom',
   testEnvironmentOptions: {
     customExportConditions: ['']
@@ -16,5 +19,7 @@ export default {
     '\\.(css|less|sass|scss)$': 'identity-obj-proxy'
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  testMatch: ['<rootDir>/src/**/*.(spec|test).ts?(x)']
+  testMatch: ['<rootDir>/src/**/*.(spec|test).ts?(x)'],
+  // Whether to use watchman for file crawling
+  watchman: false
 }
