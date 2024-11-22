@@ -38,12 +38,15 @@ describe('ListCategoriesPage', () => {
 
     // Simula o clique no botão "Próxima"
     const nextPageButton = screen.getByText(/Próxima/i)
-    userEvent.click(nextPageButton)
+    // https://cursos.alura.com.br/forum/topico-podemos-usar-o-userevent-ao-inves-do-fireevent-310309
+    await userEvent.click(nextPageButton)
 
     // Verifica itens da segunda página
     const secondPageItem = await screen.findByText('Item 2') // Nome da segunda página
     expect(secondPageItem).toBeInTheDocument()
   })
+
+  it('', () => {})
 
   // // https://www.ivstudio.com/blog/mock-service-worker
   // it('should render error state', async () => {

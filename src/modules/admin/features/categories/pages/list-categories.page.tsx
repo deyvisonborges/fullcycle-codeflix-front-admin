@@ -5,12 +5,18 @@ import {
   useGetPaginatedCategoriesQuery
 } from '../store/slice'
 import { enqueueSnackbar } from 'notistack'
-import { useEffect, useState } from 'react'
+import { useDeferredValue, useEffect, useState } from 'react'
 import { usePageBasedPagination } from '@/hooks/usePageBasedPagination'
 import { CategoryUIModel } from '../category.ui-model'
 import { categoryModelAdapter } from '@/integrations/categories'
 
 export function ListCategoriesPage() {
+  // ====> inicio search
+  const [search, setSearch] = useState<string>('')
+  const deferredSearch = useDeferredValue(search)
+  const [statusFilter, setStatusFilter] = useState('') // status: '' (todos), 'active', 'inactive'
+  // ====> fim search
+
   const navigate = useNavigate()
 
   const [categories, setCategories] = useState<CategoryUIModel[]>([])
@@ -48,8 +54,30 @@ export function ListCategoriesPage() {
   }, [deleteError, deleteSuccess])
 
   useEffect(() => {
-    if (data) setCategories(data.data.map((d) => categoryModelAdapter(d)))
-  }, [data])
+    if (data?.data) {
+      const adaptedData = data.data.map((d) =>
+        categoryModelAdapter<CategoryUIModel>(d)
+      )
+
+      const filtered = adaptedData.filter((category) => {
+        const matchesName = category.name
+          .toLowerCase()
+          .includes(search.toLowerCase())
+        const matchesStatus =
+          statusFilter === '' ||
+          (statusFilter === 'active' && category.isActive) ||
+          (statusFilter === 'inactive' && !category.isActive)
+
+        return matchesName && matchesStatus
+      })
+
+      setCategories(filtered)
+    }
+  }, [data, goToPage, search, statusFilter])
+
+  useEffect(() => {
+    goToPage(1)
+  }, [goToPage, statusFilter])
 
   // Exibe mensagem de erro ao listar categorias caso o serviço esteja indisponível
   if (isError || status === 'rejected') {
@@ -89,6 +117,24 @@ export function ListCategoriesPage() {
           ))}
         </tbody>
       </table>
+
+      <div style={{ marginBottom: '16px' }}>
+        <input
+          type="text"
+          placeholder="Buscar por nome"
+          value={deferredSearch}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <select
+          value={statusFilter}
+          onChange={(e) => setStatusFilter(e.target.value)}
+          style={{ marginLeft: '8px' }}
+        >
+          <option value="">Todos</option>
+          <option value="active">Ativo</option>
+          <option value="inactive">Inativo</option>
+        </select>
+      </div>
 
       <div style={{ display: 'flex', gap: '8px', marginTop: '16px' }}>
         <button onClick={() => goToPage(1)} disabled={currentPage === 1}>
