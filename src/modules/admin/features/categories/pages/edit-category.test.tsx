@@ -9,7 +9,7 @@ export const categoriesMocksHandlers = [
       data: [
         {
           id: '1',
-          name: 'Oliver',
+          name: 'Item 1',
           description: 'Some description type',
           is_active: true,
           deleted_at: Date.now().toString(),

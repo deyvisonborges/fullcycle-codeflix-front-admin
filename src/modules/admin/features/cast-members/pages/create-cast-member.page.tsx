@@ -27,7 +27,6 @@ export function CreateCastMemberPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsdisabled(true)
     e.preventDefault()
-    console.log(castMemberState)
     await createCastMemberMutation(convertToApiModel(castMemberState))
   }
 

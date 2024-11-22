@@ -2,6 +2,8 @@ import { apiSlice } from '@/config/store/slices/api-slice'
 import { ReadonlyAttributes, ResponseData } from '@/modules/admin/utils/types'
 import { CastMemberAPIModel } from './models/cast-member.model'
 
+const endpoint = '/cast-members'
+
 type CastMemberID = { id: string }
 type Result = ResponseData<CastMemberAPIModel>
 type UpInsertCastMemberCommand = Partial<
@@ -10,8 +12,6 @@ type UpInsertCastMemberCommand = Partial<
 type UpdateCastMemberCommand = {
   payload: UpInsertCastMemberCommand
 } & CastMemberID
-
-const endpoint = '/cast-members'
 
 export const castMembersApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({

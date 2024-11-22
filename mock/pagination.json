@@ -1,5 +1,6 @@
-  {
-    "categories": {"data": [
+{
+  "categories": {
+    "data": [
       {
         "id": "12",
         "name": "Biografia",
@@ -51,4 +52,4 @@
       "totalPages": 1
     }
   }
-  }
+}

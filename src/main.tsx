@@ -8,10 +8,10 @@ import { RouterProvider } from 'react-router-dom'
 import { routes } from './config/routing/index.tsx'
 import { SnackbarProvider } from 'notistack'
 
-if (process.env.NODE_ENV === 'development') {
-  const { isMockServiceEnabled } = await import('./mocks/browser.ts')
-  await isMockServiceEnabled()
-}
+// if (process.env.NODE_ENV === 'development') {
+//   const { isMockServiceEnabled } = await import('./mocks/browser.ts')
+//   await isMockServiceEnabled()
+// }
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

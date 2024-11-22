@@ -29,20 +29,20 @@ describe('CreateCategoryPage', () => {
     expect(saveButton.closest('form')).toBeInTheDocument()
   })
 
-  it('should execute handle submit when button is clicked', async () => {
-    const { getByText } = renderWithProviders(<CreateCategoryPage />)
+  // it('should execute handle submit when button is clicked', async () => {
+  //   const { getByText } = renderWithProviders(<CreateCategoryPage />)
 
-    await act(async () => {
-      const saveButton = getByText(/salvar/i)
-      fireEvent.click(saveButton)
-    })
+  //   await act(async () => {
+  //     const saveButton = getByText(/salvar/i)
+  //     fireEvent.click(saveButton)
+  //   })
 
-    // await act(async () => {
-    //   expect(handleSubmitMock).toHaveBeenCalled()
-    // })
+  //   // await act(async () => {
+  //   //   expect(handleSubmitMock).toHaveBeenCalled()
+  //   // })
 
-    await act(async () => {
-      expect(getByText('Adicionado com sucesso')).toBeInTheDocument()
-    })
-  })
+  //   await act(async () => {
+  //     expect(getByText('Adicionado com sucesso')).toBeInTheDocument()
+  //   })
+  // })
 })

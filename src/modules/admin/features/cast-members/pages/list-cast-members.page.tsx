@@ -11,6 +11,7 @@ import { CastMemberAPIModel } from '../api/models/cast-member.model'
 
 export function LisCastMembersPage() {
   const { data, isError, status } = useGetCastMembersQuery()
+
   const [deleteCastMember, { error: deleteError, isSuccess: deleteSuccess }] =
     useDeleteCastMemberMutation()
 

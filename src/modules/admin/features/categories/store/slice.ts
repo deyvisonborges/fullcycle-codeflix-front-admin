@@ -1,16 +1,12 @@
 import { CategoryModel as CategoryAPIModel } from '@/integrations/categories'
 import { CategoryID } from '../category-id.primitive'
 import { apiSlice } from '@/config/store/slices/api-slice'
-import {
-  PageBasedPaginationQuery,
-  PageBasedPaginationResponse
-} from '@/integrations/page-based-pagination'
+import { PageBasedPaginationQuery } from '@/integrations/page-based-pagination'
+import { ReadonlyAttributes, ResponseData } from '@/modules/admin/utils/types'
 
 const endpoint = '/categories'
 
-// WIP: remove duplications
-type ReadonlyAttributes = 'id' | 'created_at' | 'updated_at' | 'deleted_at'
-
+type Result = ResponseData<CategoryAPIModel>
 type UpInsertCategoryCommand = Partial<
   Omit<CategoryAPIModel, ReadonlyAttributes>
 >
@@ -26,14 +22,11 @@ const createPageBasedPaginationQuery = (params: PageBasedPaginationQuery) => {
 
 export const categoriesApiSlice = apiSlice.injectEndpoints({
   endpoints: ({ query, mutation }) => ({
-    getCategories: query<CategoryAPIModel[], void>({
-      query: () => `${endpoint}`,
-      providesTags: ['Categories']
-    }),
-    getPaginatedCategories: query<
-      PageBasedPaginationResponse<CategoryAPIModel[]>,
-      Partial<PageBasedPaginationQuery>
-    >({
+    // getCategories: query<CategoryAPIModel[], void>({
+    //   query: () => `${endpoint}`,
+    //   providesTags: ['Categories']
+    // }),
+    getPaginatedCategories: query<Result, Partial<PageBasedPaginationQuery>>({
       query: (params: PageBasedPaginationQuery) =>
         `${endpoint}?${createPageBasedPaginationQuery(params)}`,
       providesTags: ['Categories']
@@ -69,7 +62,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-  useGetCategoriesQuery,
+  // useGetCategoriesQuery,
   useGetPaginatedCategoriesQuery,
   useGetCategoryQuery,
   useCreateCategoryMutation,
