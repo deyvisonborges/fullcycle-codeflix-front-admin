@@ -9,10 +9,7 @@ export const store = configureStore({
     categoriesApi: categoriesApiSlice.reducer // Reducer específico de `categories`
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(
-      apiSlice.middleware,
-      categoriesApiSlice.middleware
-    )
+    getDefaultMiddleware().concat(apiSlice.middleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>

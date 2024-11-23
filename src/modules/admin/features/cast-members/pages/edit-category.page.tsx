@@ -5,17 +5,21 @@ import {
   CastMemberFormFieldsProps
 } from '../components/cast-member-form'
 import { FormLayout } from '@/modules/admin/layout/form'
-import { useGetCategoryQuery, useUpdateCategoryMutation } from '../store/slice'
 import { categoryModelAdapter } from '@/integrations/categories'
 import { useSnackbar } from 'notistack'
-import { convertToApiModel } from '../category.ui-model'
+import {
+  useGetCategoryQuery,
+  useUpdateCategoryMutation
+} from '../../categories/store/slice'
+import { convertToApiModel } from '../cast-member.ui-model'
+import { useUpdateCastMemberMutation } from '../api/cast-member.service'
 
 export function EditCategoryPage() {
   const id = useParams().id as string
   const { data } = useGetCategoryQuery({ id })
 
   const [isdisabled, setIsdisabled] = useState(false)
-  const [updateCategoryMutation, status] = useUpdateCategoryMutation()
+  const [updateCategoryMutation, status] = useUpdateCastMemberMutation()
   const [categoryState, setCategoryState] = useState<CastMemberFormFieldsProps>(
     {
       name: '',

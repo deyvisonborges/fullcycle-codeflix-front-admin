@@ -5,8 +5,6 @@ import { Provider as ReduxProvider } from 'react-redux'
 import { ThemeProvider } from '@/config/styles/theme/theme.provider'
 import { SnackbarProvider } from 'notistack'
 import { BrowserRouter } from 'react-router-dom'
-import { apiSlice } from '@/config/store/slices/api-slice'
-import { categoriesApiSlice } from '@/modules/admin/features/categories/store/slice'
 import { store } from '@/config/store'
 
 type ProvidersProps = {
@@ -17,14 +15,8 @@ const rootTmpStore = store
 
 // eslint-disable-next-line react-refresh/only-export-components
 const Providers = ({ children, store }: ProvidersProps) => {
-  const defaultStore = configureStore({
-    reducer: {
-      [categoriesApiSlice.reducerPath]: apiSlice.reducer
-    }
-  })
-
   return (
-    <ReduxProvider store={rootTmpStore || store || defaultStore}>
+    <ReduxProvider store={rootTmpStore || store}>
       <BrowserRouter>
         <ThemeProvider>
           <SnackbarProvider>{children}</SnackbarProvider>

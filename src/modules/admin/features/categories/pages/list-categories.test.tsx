@@ -80,6 +80,26 @@ describe('ListCategoriesPage', () => {
     })
   })
 
+  it('should handle delete category with success state', async () => {
+    renderWithProviders(<ListCategoriesPage />)
+
+    // Espera até que os ícones de lixeira apareçam
+    const trashIcons = await screen.findAllByTestId('trash-icon')
+
+    // Verifica se pelo menos um ícone de lixeira está no documento
+    expect(trashIcons.length).toBeGreaterThan(0)
+
+    // Clica no primeiro ícone de lixeira
+    fireEvent.click(trashIcons[0])
+
+    // Espera até que a função mockada seja chamada
+    await waitFor(() => {
+      expect(
+        screen.getByText(/Categoria deletada com sucesso/i)
+      ).toBeInTheDocument()
+    })
+  })
+
   // // https://www.ivstudio.com/blog/mock-service-worker
   // it('should render error state', async () => {
   //   mockServer.resetHandlers(...handlersFail)

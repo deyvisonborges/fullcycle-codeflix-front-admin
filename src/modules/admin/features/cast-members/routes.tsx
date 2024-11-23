@@ -1,6 +1,7 @@
 import { RouteObject } from 'react-router-dom'
 import { LisCastMembersPage } from './pages/list-cast-members.page'
 import { CreateCastMemberPage } from './pages/create-cast-member.page'
+// import { EditCategoryPage } from './pages/edit-category.page'
 
 export const castMembersRoutes: RouteObject = {
   path: 'cast-members',

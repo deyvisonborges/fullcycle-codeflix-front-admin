@@ -63,7 +63,7 @@ export function EditCategoryPage() {
     return <p>Not found category with id {id}</p>
   }
 
-  if (!data) return null
+  if (!data) return <p>Sem dados</p>
 
   return (
     <FormLayout

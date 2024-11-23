@@ -111,7 +111,10 @@ export function ListCategoriesPage() {
                   }
                 />
                 &nbsp;
-                <HiTrash onClick={() => deleteCategory({ id: category.id })} />
+                <HiTrash
+                  data-testid="trash-icon"
+                  onClick={() => deleteCategory({ id: category.id })}
+                />
               </td>
             </tr>
           ))}
