@@ -56,7 +56,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     }),
     updateCategory: mutation<void, UpdateCategoryCommand>({
       query: ({ id, payload }) => ({
-        url: `${endpoint}/${id}`,
+        url: `/categories/${id}`,
         method: 'PUT',
         body: payload
       }),
@@ -64,7 +64,7 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     }),
     deleteCategory: mutation<void, CategoryID>({
       query: ({ id }: CategoryID) => ({
-        url: `${endpoint}/${id}`,
+        url: `/categories/${id}`,
         method: 'DELETE'
       }),
       invalidatesTags: ['Categories']

@@ -8,19 +8,22 @@ import { RouterProvider } from 'react-router-dom'
 import { routes } from './config/routing/index.tsx'
 import { SnackbarProvider } from 'notistack'
 
-// if (process.env.NODE_ENV === 'development') {
-//   const { isMockServiceEnabled } = await import('./mocks/browser.ts')
-//   await isMockServiceEnabled()
-// }
+async function enableMocking() {
+  if (process.env.NODE_ENV !== 'development') return
+  const { worker } = await import('./mocks/browser')
+  return worker.start()
+}
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <ReduxProvider store={store}>
-      <ThemeProvider>
-        <SnackbarProvider>
-          <RouterProvider router={routes} />
-        </SnackbarProvider>
-      </ThemeProvider>
-    </ReduxProvider>
-  </StrictMode>
-)
+enableMocking().then(() => {
+  createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+      <ReduxProvider store={store}>
+        <ThemeProvider>
+          <SnackbarProvider>
+            <RouterProvider router={routes} />
+          </SnackbarProvider>
+        </ThemeProvider>
+      </ReduxProvider>
+    </StrictMode>
+  )
+})

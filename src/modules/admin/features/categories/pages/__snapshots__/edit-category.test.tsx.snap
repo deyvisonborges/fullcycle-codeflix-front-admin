@@ -3,7 +3,7 @@
 exports[`EditCategoryPage renders correctly 1`] = `
 <DocumentFragment>
   <p>
-    Sem dados
+    Carregando categoria...
   </p>
 </DocumentFragment>
 `;

@@ -2,6 +2,7 @@ import { ListCategoriesPage } from './list-categories.page'
 import { renderWithProviders } from '@/utils/test/renderWithProviders'
 import { fireEvent, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { handlersFail, mockServer } from '../mocks/handlers'
 // import { handlersFail, mockServer } from '../mocks/handlers'
 
 describe('ListCategoriesPage', () => {
@@ -42,7 +43,7 @@ describe('ListCategoriesPage', () => {
     await userEvent.click(nextPageButton)
 
     // Verifica itens da segunda página
-    const secondPageItem = await screen.findByText('Item 2') // Nome da segunda página
+    const secondPageItem = await screen.findByText('Item 3') // Nome da segunda página
     expect(secondPageItem).toBeInTheDocument()
   })
 
@@ -100,7 +101,7 @@ describe('ListCategoriesPage', () => {
     })
   })
 
-  // // https://www.ivstudio.com/blog/mock-service-worker
+  // https://www.ivstudio.com/blog/mock-service-worker
   // it('should render error state', async () => {
   //   mockServer.resetHandlers(...handlersFail)
 
@@ -108,10 +109,5 @@ describe('ListCategoriesPage', () => {
 
   //   const errorMessage = await screen.findByText('Erro ao listar as categorias')
   //   expect(errorMessage).toBeInTheDocument()
-  // })
-
-  // it('should handle on page change', () => {
-  //   renderWithProviders(<ListCategoriesPage />)
-  //   await
   // })
 })

@@ -1,4 +1,5 @@
 import { delay, http, HttpResponse } from 'msw'
+import { setupWorker } from 'msw/browser'
 import { setupServer } from 'msw/node'
 
 const MOCK_API = {
@@ -28,7 +29,7 @@ const mockData = [
     id: '3',
     name: 'Item 3',
     description: 'Some description to item 3',
-    is_active: true,
+    is_active: false,
     deleted_at: Date.now().toString(),
     created_at: Date.now().toString(),
     updated_at: Date.now().toString()
@@ -37,7 +38,7 @@ const mockData = [
     id: '4',
     name: 'Item 4',
     description: 'Some description to item 4',
-    is_active: true,
+    is_active: false,
     deleted_at: Date.now().toString(),
     created_at: Date.now().toString(),
     updated_at: Date.now().toString()
@@ -45,30 +46,25 @@ const mockData = [
 ]
 
 export const mocksHandlers = [
-  http.get(MOCK_API.CATEGORIES, async ({ request }) => {
-    const searchParams = new URL(request.url).searchParams
-    const page = parseInt(searchParams.get('page') || '1', 10)
-    const perPage = parseInt(
-      searchParams.get('per_page') || '1',
-      mockData.length
-    )
-
-    // Calcular o índice inicial e final para a paginação
-    const startIndex = (page - 1) * perPage
-    const endIndex = startIndex + perPage
-
-    // Paginar os dados
-    const paginatedData = mockData.slice(startIndex, endIndex)
-
+  http.get(MOCK_API.CATEGORIES, async () => {
     await delay()
+
+    return HttpResponse.json({ data: mockData })
+  }),
+  http.delete(MOCK_API.CATEGORIES + '/:id', async ({ params }) => {
+    await delay()
+
+    const { id } = params
+    const itemIndex = mockData.findIndex((mock) => mock.id === id)
+
+    if (itemIndex === -1) {
+      return HttpResponse.json({ message: 'Item not found' }, { status: 404 })
+    }
+
+    const [deletedItem] = mockData.splice(itemIndex, 1)
+
     return HttpResponse.json({
-      data: paginatedData,
-      meta: {
-        total: mockData.length,
-        page,
-        perPage,
-        totalPages: Math.ceil(mockData.length / perPage)
-      }
+      data: deletedItem
     })
   })
 ]

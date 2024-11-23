@@ -12,7 +12,7 @@ import { convertToApiModel } from '../category.ui-model'
 
 export function EditCategoryPage() {
   const id = useParams().id as string
-  const { data } = useGetCategoryQuery({ id })
+  const { data, isLoading } = useGetCategoryQuery({ id })
 
   const [isdisabled, setIsdisabled] = useState(false)
   const [updateCategoryMutation, status] = useUpdateCategoryMutation()
@@ -58,6 +58,8 @@ export function EditCategoryPage() {
     const { name, checked } = e.target as never
     setCategoryState({ ...categoryState, [name]: checked })
   }
+
+  if (isLoading) return <p>Carregando categoria...</p>
 
   if (!categoryState) {
     return <p>Not found category with id {id}</p>

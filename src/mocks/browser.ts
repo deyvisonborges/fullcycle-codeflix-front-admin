@@ -1,15 +1,6 @@
-// import { mocksHandlers } from '@/modules/admin/features/categories/mocks/handlers'
-// import { setupWorker } from 'msw/browser'
+import { mocksHandlers } from '@/modules/admin/features/categories/mocks/handlers'
+import { setupWorker } from 'msw/browser'
+import { setupServer } from 'msw/node'
 
-// export async function isMockServiceEnabled() {
-//   if (import.meta.env.VITE_API_MOCKING === 'true') {
-//     if (typeof window === 'undefined') {
-//       const { server } = await import('./node') // dont use in browser
-//       console.log('Server worker started')
-//       server.listen()
-//     } else {
-//       console.log('Browser worker started')
-//       worker.start()
-//     }
-//   }
-// }
+export const worker = setupWorker(...mocksHandlers)
+export const server = setupServer(...mocksHandlers)
