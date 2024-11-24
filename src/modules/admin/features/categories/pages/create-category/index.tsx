@@ -3,14 +3,14 @@ import {
   CategoryFormFieldsDataProps
 } from '../../components/category-form-fields/category-form-fields'
 import { FormLayout } from '@/modules/admin/layout/form'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { enqueueSnackbar } from 'notistack'
 import { useCreateCategoryMutation } from '../../store/slice'
 import { convertToApiModel } from '../../category.ui-model'
 
 export function CreateCategoryPage() {
-  const [createCategoryMutation] = useCreateCategoryMutation()
+  const [createCategoryMutation, status] = useCreateCategoryMutation()
   const [isdisabled, setIsdisabled] = useState(false)
   const [categoryState, setCategoryState] =
     useState<CategoryFormFieldsDataProps>({
@@ -18,6 +18,12 @@ export function CreateCategoryPage() {
       isActive: false,
       description: ''
     })
+
+  useEffect(() => {
+    if (status.error) {
+      enqueueSnackbar('Erro ao criar categoria', { variant: 'error' })
+    }
+  }, [status.error])
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     setIsdisabled(true)
