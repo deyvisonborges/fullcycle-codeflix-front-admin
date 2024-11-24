@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "name": "Item 1",
+    "description": "Some description type",
+    "is_active": true,
+    "deleted_at": "1732444328469",
+    "created_at": "1732444328469",
+    "updated_at": "1732444328469"
+  },
+  {
+    "id": "2",
+    "name": "Item 2",
+    "description": "Some description to item 2",
+    "is_active": true,
+    "deleted_at": "1732444328469",
+    "created_at": "1732444328469",
+    "updated_at": "1732444328469"
+  },
+  {
+    "id": "3",
+    "name": "Item 3",
+    "description": "Some description to item 3",
+    "is_active": false,
+    "deleted_at": "1732444328469",
+    "created_at": "1732444328469",
+    "updated_at": "1732444328469"
+  },
+  {
+    "id": "4",
+    "name": "Item 4",
+    "description": "Some description to item 4",
+    "is_active": false,
+    "deleted_at": "1732444328469",
+    "created_at": "1732444328469",
+    "updated_at": "1732444328469"
+  }
+]

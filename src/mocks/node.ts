@@ -1,4 +1,4 @@
 import { categoriesMockHandlers } from '@/modules/admin/features/categories/api/mocks/categories.mock-handlers'
-import { setupWorker } from 'msw/browser'
+import { setupServer } from 'msw/node'
 
-export const worker = setupWorker(...categoriesMockHandlers)
+export const server = setupServer(...categoriesMockHandlers)

@@ -7,6 +7,6 @@ describe('Logo Component', () => {
     const logoImage = getByAltText('Logo')
 
     // Verifica se o src da imagem é o valor do mock
-    expect(logoImage.src).toContain('http://localhost/test-file-stub')
+    expect(logoImage?.src).toContain('http://localhost/test-file-stub')
   })
 })
