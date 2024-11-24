@@ -1,13 +1,8 @@
 import { act, fireEvent } from '@testing-library/react'
-import { CreateCategoryPage } from '.'
+import { CreateCategoryPage } from '../create-category'
 import { renderWithProviders } from '@/utils/test/renderWithProviders'
 
 describe('CreateCategoryPage', () => {
-  // beforeEach(() => {
-  //   jest.resetModules() // Reseta os módulos entre os testes
-  //   jest.clearAllMocks() // Limpa os mocks para evitar interferências
-  // })
-
   it('renders correctly', () => {
     const { asFragment } = renderWithProviders(<CreateCategoryPage />)
     expect(asFragment()).toMatchSnapshot()

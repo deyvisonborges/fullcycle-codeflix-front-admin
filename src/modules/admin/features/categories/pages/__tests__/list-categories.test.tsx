@@ -1,7 +1,9 @@
-import { ListCategoriesPage } from './list-categories.page'
+import { server } from '@/mocks/node'
+import { ListCategoriesPage } from '../list-categories.page'
 import { renderWithProviders } from '@/utils/test/renderWithProviders'
 import { fireEvent, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { http, HttpResponse } from 'msw'
 
 describe('ListCategoriesPage', () => {
   it('renders correctly', () => {
@@ -99,9 +101,42 @@ describe('ListCategoriesPage', () => {
     })
   })
 
+  it('should handle delete category with error state', async () => {
+    server.use(
+      http.delete('http://localhost:4000/categories/:id', async () => {
+        return HttpResponse.error()
+      })
+    )
+
+    renderWithProviders(<ListCategoriesPage />)
+
+    // Espera até que os ícones de lixeira apareçam
+    const trashIcons = await screen.findAllByTestId('trash-icon')
+
+    // Verifica se pelo menos um ícone de lixeira está no documento
+    expect(trashIcons.length).toBeGreaterThan(0)
+
+    // Clica no primeiro ícone de lixeira
+    fireEvent.click(trashIcons[0])
+
+    // Espera até que a função mockada seja chamada
+    await waitFor(() => {
+      expect(screen.getByText(/Erro ao deletar categoria/i)).toBeInTheDocument()
+    })
+  })
+
   // https://www.ivstudio.com/blog/mock-service-worker
-  // it('should render error state', async () => {
-  //   mockServer.resetHandlers(...handlersFail)
+  // https://mswjs.io/docs/best-practices/network-behavior-overrides/
+  // it('should render error to load categories', async () => {
+  //   server.use(
+  //     http.get(
+  //       'http://localhost:4000/categories',
+  //       async () => {
+  //         return HttpResponse.error()
+  //       },
+  //       { once: true }
+  //     )
+  //   )
 
   //   renderWithProviders(<ListCategoriesPage />)
 

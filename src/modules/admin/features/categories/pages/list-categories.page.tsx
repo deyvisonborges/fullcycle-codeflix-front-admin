@@ -5,7 +5,7 @@ import {
   useGetPaginatedCategoriesQuery
 } from '../store/slice'
 import { enqueueSnackbar } from 'notistack'
-import { useDeferredValue, useEffect, useState } from 'react'
+import { useCallback, useDeferredValue, useEffect, useState } from 'react'
 import { usePageBasedPagination } from '@/hooks/usePageBasedPagination'
 import { CategoryUIModel } from '../category.ui-model'
 import { categoryModelAdapter } from '@/integrations/categories'
@@ -75,6 +75,13 @@ export function ListCategoriesPage() {
     }
   }, [data, goToPage, search, statusFilter])
 
+  const handleDeleteCategory = useCallback(
+    async (id: string) => {
+      await deleteCategory({ id })
+    },
+    [deleteCategory]
+  )
+
   useEffect(() => {
     goToPage(1)
   }, [goToPage, statusFilter])
@@ -113,7 +120,7 @@ export function ListCategoriesPage() {
                 &nbsp;
                 <HiTrash
                   data-testid="trash-icon"
-                  onClick={() => deleteCategory({ id: category.id })}
+                  onClick={() => handleDeleteCategory(category.id)}
                 />
               </td>
             </tr>

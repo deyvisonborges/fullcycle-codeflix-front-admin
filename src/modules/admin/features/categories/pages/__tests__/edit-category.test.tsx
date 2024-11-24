@@ -1,4 +1,4 @@
-import { EditCategoryPage } from './edit-category.page'
+import { EditCategoryPage } from '../edit-category.page'
 import { renderWithProviders } from '@/utils/test/renderWithProviders'
 
 describe('EditCategoryPage', () => {
