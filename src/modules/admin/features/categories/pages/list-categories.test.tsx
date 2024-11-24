@@ -2,7 +2,6 @@ import { ListCategoriesPage } from './list-categories.page'
 import { renderWithProviders } from '@/utils/test/renderWithProviders'
 import { fireEvent, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { handlersFail, mockServer } from '../mocks/handlers'
 // import { handlersFail, mockServer } from '../mocks/handlers'
 
 describe('ListCategoriesPage', () => {
