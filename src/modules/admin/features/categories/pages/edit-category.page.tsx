@@ -11,8 +11,9 @@ import { useSnackbar } from 'notistack'
 import { convertToApiModel } from '../category.ui-model'
 
 export function EditCategoryPage() {
-  const id = useParams().id as string
-  const { data, isLoading } = useGetCategoryQuery({ id })
+  const { id } = useParams()
+
+  const { data, isLoading } = useGetCategoryQuery({ id: String(id) })
 
   const [isdisabled, setIsdisabled] = useState(false)
   const [updateCategoryMutation, status] = useUpdateCategoryMutation()
@@ -27,7 +28,13 @@ export function EditCategoryPage() {
 
   useEffect(() => {
     if (id && data) {
-      setCategoryState(categoryModelAdapter(data))
+      const category = data.data
+      console.log(category)
+      setCategoryState({
+        name: category?.name,
+        description: category?.description,
+        isActive: category?.is_active
+      })
     }
   }, [data, id])
 
@@ -44,7 +51,7 @@ export function EditCategoryPage() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     await updateCategoryMutation({
-      id: id,
+      id: String(id),
       payload: convertToApiModel(categoryState)
     })
   }

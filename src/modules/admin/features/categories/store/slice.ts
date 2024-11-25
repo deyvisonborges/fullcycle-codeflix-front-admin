@@ -34,16 +34,11 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     // Como os dados veem no data: [], nao eh possivel buscar pelo ID diretamente
     // Iss no mock, pra resolver, faço o transforme dos dados, pra trazer somente
     // a categoria que eu preciso
-    getCategory: query<CategoryAPIModel, CategoryID>({
+    getCategory: query<Result, CategoryID>({
       query: ({ id }: CategoryID) => ({
         method: 'GET',
-        url: `/categories?data.id=${id}`
+        url: `/categories/${id}` // desabilitar isso em producao
       }),
-      transformResponse: (response: Result, _, arg) => {
-        const category = response.data.find((item) => item.id === arg.id)
-        if (!category) throw new Error(`Category with ID ${arg.id} not found`)
-        return category
-      },
       providesTags: ['Categories']
     }),
     createCategory: mutation<void, UpInsertCategoryCommand>({
