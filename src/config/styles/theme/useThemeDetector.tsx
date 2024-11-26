@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { ThemeMode } from './theme.types'
 
+// https://theme-toggle.rdsx.dev/?ref=dailydev
+// transicoes de pagina
+
 export function useThemeSystemDetector() {
   const isClient = typeof window !== 'undefined'
 
