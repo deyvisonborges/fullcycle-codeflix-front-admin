@@ -6,6 +6,7 @@ import { ReadonlyAttributes, ResponseData } from '@/modules/admin/utils/types'
 
 const endpoint = '/categories'
 
+type Results = ResponseData<CategoryAPIModel[]>
 type Result = ResponseData<CategoryAPIModel>
 type UpInsertCategoryCommand = Partial<
   Omit<CategoryAPIModel, ReadonlyAttributes>
@@ -26,18 +27,15 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     //   query: () => `${endpoint}`,
     //   providesTags: ['Categories']
     // }),
-    getPaginatedCategories: query<Result, Partial<PageBasedPaginationQuery>>({
+    getPaginatedCategories: query<Results, Partial<PageBasedPaginationQuery>>({
       query: (params: PageBasedPaginationQuery) =>
         `${endpoint}?${createPageBasedPaginationQuery(params)}`,
       providesTags: ['Categories']
     }),
-    // Como os dados veem no data: [], nao eh possivel buscar pelo ID diretamente
-    // Iss no mock, pra resolver, faço o transforme dos dados, pra trazer somente
-    // a categoria que eu preciso
     getCategory: query<Result, CategoryID>({
       query: ({ id }: CategoryID) => ({
         method: 'GET',
-        url: `/categories/${id}` // desabilitar isso em producao
+        url: `/categories/${id}`
       }),
       providesTags: ['Categories']
     }),

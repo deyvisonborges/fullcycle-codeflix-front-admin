@@ -6,7 +6,6 @@ import {
 } from '../components/category-form-fields'
 import { FormLayout } from '@/modules/admin/layout/form'
 import { useGetCategoryQuery, useUpdateCategoryMutation } from '../store/slice'
-import { categoryModelAdapter } from '@/integrations/categories'
 import { useSnackbar } from 'notistack'
 import { convertToApiModel } from '../category.ui-model'
 
@@ -29,11 +28,10 @@ export function EditCategoryPage() {
   useEffect(() => {
     if (id && data) {
       const category = data.data
-      console.log(category)
       setCategoryState({
-        name: category?.name,
-        description: category?.description,
-        isActive: category?.is_active
+        name: category.name,
+        description: category.description,
+        isActive: category.is_active
       })
     }
   }, [data, id])
@@ -67,10 +65,6 @@ export function EditCategoryPage() {
   }
 
   if (isLoading) return <p>Carregando categoria...</p>
-
-  if (!categoryState) {
-    return <p>Not found category with id {id}</p>
-  }
 
   if (!data) return <p>Sem dados</p>
 

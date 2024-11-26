@@ -4,6 +4,7 @@ import { delay, http, HttpResponse } from 'msw'
 
 const ENDPOINT = 'http://localhost:4000/categories'
 
+// https://mswjs.io/docs/api/http/
 export const categoriesMockHandlers = [
   // Get all
   http.get(ENDPOINT, async () => {
@@ -36,5 +37,26 @@ export const categoriesMockHandlers = [
     const [deletedItem] = categoriesStub.splice(itemIndex, 1)
 
     return HttpResponse.json({ data: deletedItem })
+  }),
+
+  // Update by id
+  http.put(`${ENDPOINT}/:id`, async ({ request, params }) => {
+    await delay()
+
+    const { id } = params
+    const nextData = await request.json()
+
+    const itemIndex = categoriesStub.findIndex((mock) => mock.id === id)
+
+    if (itemIndex === -1)
+      return HttpResponse.json({ errors: ['Item not found'] }, { status: 404 })
+
+    const updatedItem = {
+      ...categoriesStub[itemIndex],
+      ...nextData?.toString,
+      updated_at: Date.now().toString()
+    }
+    categoriesStub[itemIndex] = updatedItem
+    return HttpResponse.json({ data: updatedItem })
   })
 ]

@@ -24,6 +24,7 @@ Object.defineProperty(window, 'matchMedia', {
 })
 
 // Establish API mocking before all tests.
+// https://stackoverflow.com/questions/68024935/msw-logging-warnings-for-unhandled-supertest-requests
 beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }))
 
 // Reset any request handlers that we may add during the tests,

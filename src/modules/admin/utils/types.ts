@@ -21,7 +21,7 @@ export type ReadonlyAttributes =
   | 'deleted_at'
 
 export type ResponseData<T> = {
-  data: T[]
+  data: T
   errors?: []
   meta?: null
 }
