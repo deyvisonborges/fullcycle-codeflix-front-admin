@@ -2,7 +2,7 @@ import { apiSlice, apiSliceTags } from '@/config/store/slices/api-slice'
 import { ReadonlyAttributes, ResponseData } from '@/modules/admin/utils/types'
 import { VideoAPIModel } from './video.api-model'
 import { VideoID } from '../video-id.primitive'
-import { VIDEOS_ENDPOINT } from '../routes'
+import { VIDEOS_ENDPOINT } from '../videos.routes'
 
 type Results = ResponseData<VideoAPIModel[]>
 type Result = ResponseData<VideoAPIModel>

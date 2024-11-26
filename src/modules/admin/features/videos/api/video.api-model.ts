@@ -32,13 +32,16 @@ export type VideoAPIModel = {
   video_file_url: string
 }
 
-// export function videoAPIModelAdapter<T>(props: VideoAPIModel) {
-//   return {
-//     ...(props.id && { id: props.id }),
-//     ...(props.name && { name: props.name }),
-//     ...(props.type && { type: props.type }),
-//     ...(props.deleted_at && { deletedAt: props.deleted_at }),
-//     ...(props.created_at && { createdAt: props.created_at }),
-//     ...(props.updated_at && { updatedAt: props.updated_at })
-//   } as T
+// type AdapterConfig = Record<string, string | ((value: any) => any)>
+
+// export function createAdapter<T>(data: T, config: AdapterConfig): T {
+//   return Object.keys(config).reduce((acc, key) => {
+//     const transform = config[key]
+//     if (typeof transform === 'function') {
+//       acc[key] = transform(data[key])
+//     } else if (data[transform]) {
+//       acc[key] = data[transform]
+//     }
+//     return acc
+//   }, {} as T)
 // }

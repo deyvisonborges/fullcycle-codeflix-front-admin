@@ -11,7 +11,9 @@ export function Sidebar() {
       >
         Create category
       </p>
-      <Link to="/dashboard/cast-members">cast members</Link>
+      <Link to="/dashboard/cast-members">Ir para categorias</Link>
+      <Link to="/dashboard/cast-members">Ir para cast members</Link>
+      <Link to="/dashboard/videos">Ir para videos</Link>
     </S.Container>
   )
 }
