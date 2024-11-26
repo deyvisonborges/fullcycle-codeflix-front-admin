@@ -31,7 +31,7 @@ export const videosApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: [apiSliceTags.videos]
     }),
-    updateVide: mutation<void, UpdateVideoCommand>({
+    updateVideo: mutation<void, UpdateVideoCommand>({
       query: ({ id, payload }) => ({
         url: `${VIDEOS_ENDPOINT}/${id}`,
         method: 'PUT',
@@ -53,6 +53,6 @@ export const {
   useGetVideosQuery,
   useGetVideoQuery,
   useCreateVideoMutation,
-  useUpdateVideMutation,
-  useDeleteVideMutation
-} = VidesApiSlice
+  useUpdateVideoMutation,
+  useDeleteVideoMutation
+} = videosApiSlice
