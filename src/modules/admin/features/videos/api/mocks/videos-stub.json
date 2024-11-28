@@ -7,7 +7,7 @@
     "opened": true,
     "rating": "PG",
     "duration": 120,
-    "deleted_at": null,
+    "deleted_at": "2022-01-01T00:00:00Z",
     "created_at": "2022-01-01T00:00:00Z",
     "updated_at": "2023-06-15T12:00:00Z",
     "genres": [
@@ -15,7 +15,7 @@
         "id": "101",
         "name": "Documentary",
         "is_active": true,
-        "deleted_at": null,
+        "deleted_at": "2022-01-01T00:00:00Z",
         "created_at": "2021-05-10T10:00:00Z",
         "updated_at": "2022-08-20T15:00:00Z",
         "privot": {
@@ -32,17 +32,17 @@
         "is_active": true,
         "created_at": "2020-11-01T09:00:00Z",
         "updated_at": "2022-03-01T14:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "cast_members": [
       {
         "id": "301",
         "name": "Dr. Alice Smith",
-        "type": "Narrator",
+        "type": 0,
         "created_at": "2021-06-01T08:00:00Z",
         "updated_at": "2022-02-01T13:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "thumb_file_url": "https://example.com/thumbs/video1.jpg",
@@ -58,7 +58,7 @@
     "opened": false,
     "rating": "PG-13",
     "duration": 140,
-    "deleted_at": null,
+    "deleted_at": "2022-01-01T00:00:00Z",
     "created_at": "2021-04-10T00:00:00Z",
     "updated_at": "2023-01-12T09:00:00Z",
     "genres": [
@@ -66,7 +66,7 @@
         "id": "102",
         "name": "Sci-Fi",
         "is_active": true,
-        "deleted_at": null,
+        "deleted_at": "2022-01-01T00:00:00Z",
         "created_at": "2020-08-15T11:30:00Z",
         "updated_at": "2023-02-25T08:30:00Z",
         "privot": {
@@ -83,25 +83,25 @@
         "is_active": true,
         "created_at": "2019-03-01T07:00:00Z",
         "updated_at": "2023-05-01T10:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "cast_members": [
       {
         "id": "302",
         "name": "John Doe",
-        "type": "Actor",
+        "type": 0,
         "created_at": "2020-01-01T06:00:00Z",
         "updated_at": "2021-09-01T11:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       },
       {
         "id": "303",
         "name": "Jane Doe",
-        "type": "Actor",
+        "type": 0,
         "created_at": "2020-01-02T07:00:00Z",
         "updated_at": "2021-09-02T12:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "thumb_file_url": "https://example.com/thumbs/video2.jpg",
@@ -117,7 +117,7 @@
     "opened": true,
     "rating": "G",
     "duration": 90,
-    "deleted_at": null,
+    "deleted_at": "2022-01-01T00:00:00Z",
     "created_at": "2019-05-20T00:00:00Z",
     "updated_at": "2022-07-18T14:00:00Z",
     "genres": [
@@ -125,7 +125,7 @@
         "id": "103",
         "name": "History",
         "is_active": true,
-        "deleted_at": null,
+        "deleted_at": "2022-01-01T00:00:00Z",
         "created_at": "2018-09-01T09:30:00Z",
         "updated_at": "2022-11-20T12:00:00Z",
         "privot": {
@@ -142,17 +142,17 @@
         "is_active": true,
         "created_at": "2018-01-01T08:00:00Z",
         "updated_at": "2021-01-01T09:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "cast_members": [
       {
         "id": "304",
         "name": "Emily Clark",
-        "type": "Director",
+        "type": 0,
         "created_at": "2019-01-10T07:00:00Z",
         "updated_at": "2020-01-10T08:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "thumb_file_url": "https://example.com/thumbs/video3.jpg",
@@ -168,7 +168,7 @@
     "opened": true,
     "rating": "PG",
     "duration": 110,
-    "deleted_at": null,
+    "deleted_at": "2022-01-01T00:00:00Z",
     "created_at": "2020-06-15T00:00:00Z",
     "updated_at": "2022-03-10T15:00:00Z",
     "genres": [
@@ -176,7 +176,7 @@
         "id": "104",
         "name": "Nature",
         "is_active": true,
-        "deleted_at": null,
+        "deleted_at": "2022-01-01T00:00:00Z",
         "created_at": "2019-10-10T10:00:00Z",
         "updated_at": "2022-05-01T10:00:00Z",
         "privot": {
@@ -193,17 +193,17 @@
         "is_active": true,
         "created_at": "2018-12-01T11:00:00Z",
         "updated_at": "2020-12-01T11:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "cast_members": [
       {
         "id": "305",
         "name": "David Attenborough",
-        "type": "Narrator",
+        "type": 0,
         "created_at": "2017-01-01T12:00:00Z",
         "updated_at": "2020-01-01T12:00:00Z",
-        "deleted_at": null
+        "deleted_at": "2022-01-01T00:00:00Z"
       }
     ],
     "thumb_file_url": "https://example.com/thumbs/video4.jpg",
