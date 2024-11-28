@@ -1,15 +1,35 @@
+import { ResponseData } from '@/modules/admin/utils/types'
 import categoriesStub from './categories-stub.json'
 
 import { delay, http, HttpResponse } from 'msw'
+import { CategoryAPIModel } from '../models/category.model'
 
 const ENDPOINT = 'http://localhost:4000/categories'
 
 // https://mswjs.io/docs/api/http/
 export const categoriesMockHandlers = [
   // Get all
-  http.get(ENDPOINT, async () => {
+  http.get(ENDPOINT, async ({ request }) => {
+    const url = new URL(request.url)
+    const page = Number(url.searchParams.get('page'))
+    const perPage = Number(url.searchParams.get('per_page')) // pageSize
+
+    const startIndex = (page - 1) * perPage
+    const endIndex = startIndex + perPage
+
+    const paginatedCategories = categoriesStub.slice(startIndex, endIndex)
+    const totalPages = Math.ceil(categoriesStub.length / perPage)
+
     await delay()
-    return HttpResponse.json({ data: categoriesStub })
+
+    const response = {
+      data: paginatedCategories,
+      meta: {
+        totalPages: totalPages, // Total real de páginas
+        currentPage: page // Opcional: informa a página atual para controle no frontend
+      }
+    } as unknown as ResponseData<CategoryAPIModel[]>
+    return HttpResponse.json(response)
   }),
 
   // Get by id

@@ -1,3 +1,5 @@
+import { PageBasedPagination } from '@/integrations/page-based-pagination'
+
 // Utilitário para converter uma chave `snake_case` para `camelCase`
 type SnakeToCamelCase<S extends string> = S extends `${infer T}_${infer U}`
   ? `${T}${Capitalize<SnakeToCamelCase<U>>}`
@@ -23,5 +25,5 @@ export type ReadonlyAttributes =
 export type ResponseData<T> = {
   data: T
   errors?: []
-  meta?: null
+  meta?: Partial<PageBasedPagination>
 }

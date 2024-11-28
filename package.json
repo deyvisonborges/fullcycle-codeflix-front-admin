@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "NODE_ENV=development vite",
+    "dev": "NODE_ENV=development vite && npm run mock-server",
     "build": "tsc -b && vite build",
     "code:check": "eslint ./src --report-unused-disable-directives --max-warnings=0",
     "code:format": "eslint ./src --fix",

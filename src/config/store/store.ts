@@ -2,11 +2,13 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { categoriesApiSlice } from '@/modules/admin/features/categories/store/slice'
 import { apiSlice } from './slices/api-slice'
+import { videosApiSlice } from '@/modules/admin/features/videos/api/videos.api'
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer, // Reducer para a API geral
-    categoriesApi: categoriesApiSlice.reducer // Reducer específico de `categories`
+    categoriesApi: categoriesApiSlice.reducer, // Reducer específico de `categories`
+    videosApi: videosApiSlice.reducer // Reducer específico de `videos`
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware)

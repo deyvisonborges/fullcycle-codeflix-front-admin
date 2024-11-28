@@ -10,10 +10,11 @@ export function usePageBasedPagination<T>({
   itemsPerPage
 }: UsePageBasedPaginationOptions<T>) {
   const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
 
-  const totalPages = useMemo(() => {
-    return Math.ceil(data.length / itemsPerPage)
-  }, [data.length, itemsPerPage])
+  // const totalPages = useMemo(() => {
+  //   return Math.ceil(data.length / itemsPerPage)
+  // }, [data.length, itemsPerPage])
 
   const currentItems = useMemo(() => {
     const startIndex = (currentPage - 1) * itemsPerPage
@@ -49,6 +50,7 @@ export function usePageBasedPagination<T>({
     goToPage,
     goToNextPage,
     goToPreviousPage,
-    resetPagination
+    resetPagination,
+    setTotalPages
   }
 }

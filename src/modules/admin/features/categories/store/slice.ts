@@ -18,6 +18,7 @@ const createPageBasedPaginationQuery = (params: PageBasedPaginationQuery) => {
   const query = new URLSearchParams()
   if (params.page) query.append('page', params.page.toString())
   if (params.per_page) query.append('per_page', params.per_page.toString())
+
   return query.toString()
 }
 
@@ -30,6 +31,12 @@ export const categoriesApiSlice = apiSlice.injectEndpoints({
     getPaginatedCategories: query<Results, Partial<PageBasedPaginationQuery>>({
       query: (params: PageBasedPaginationQuery) =>
         `${endpoint}?${createPageBasedPaginationQuery(params)}`,
+      // merge: (currentCache, newItems) => {
+      //   console.log('ok')
+      //   currentCache.data.push(...newItems.data) // Concatena os itens
+      //   currentCache.meta = newItems.meta // Atualiza metadados
+      // },
+      // serializeQueryArgs: ({ endpointName }) => endpointName,
       providesTags: ['Categories']
     }),
     getCategory: query<Result, CategoryID>({

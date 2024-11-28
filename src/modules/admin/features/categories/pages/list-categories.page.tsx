@@ -15,6 +15,10 @@ export function ListCategoriesPage() {
   const [search, setSearch] = useState<string>('')
   const deferredSearch = useDeferredValue(search)
   const [statusFilter, setStatusFilter] = useState('') // status: '' (todos), 'active', 'inactive'
+  // const [filteredCategories, setFilteredCategories] = useState<
+  //   CategoryUIModel[]
+  // >([])
+
   // ====> fim search
 
   const navigate = useNavigate()
@@ -29,8 +33,12 @@ export function ListCategoriesPage() {
     currentItems,
     goToPage,
     goToNextPage,
-    goToPreviousPage
-  } = usePageBasedPagination({ data: categories, itemsPerPage: ITEMS_PER_PAGE })
+    goToPreviousPage,
+    setTotalPages
+  } = usePageBasedPagination({
+    data: categories,
+    itemsPerPage: ITEMS_PER_PAGE
+  })
 
   const { data, isError, status } = useGetPaginatedCategoriesQuery({
     page: currentPage,
@@ -59,21 +67,38 @@ export function ListCategoriesPage() {
         categoryModelAdapter<CategoryUIModel>(d)
       )
 
-      const filtered = adaptedData.filter((category) => {
-        const matchesName = category.name
-          .toLowerCase()
-          .includes(search.toLowerCase())
-        const matchesStatus =
-          statusFilter === '' ||
-          (statusFilter === 'active' && category.isActive) ||
-          (statusFilter === 'inactive' && !category.isActive)
+      setCategories((prevCategories) => {
+        // Filtrar categorias já existentes para evitar duplicação
+        const idsExistentes = new Set(prevCategories.map((cat) => cat.id))
+        const novasCategorias = adaptedData.filter(
+          (cat) => !idsExistentes.has(cat.id)
+        )
 
-        return matchesName && matchesStatus
+        // Combinar as categorias existentes com as novas
+        return [...prevCategories, ...novasCategorias]
       })
 
-      setCategories(filtered)
+      setTotalPages(Number(data?.meta?.totalPages))
     }
-  }, [data, goToPage, search, statusFilter])
+  }, [data, setTotalPages])
+  useEffect(() => {
+    console.log(categories)
+  }, [categories])
+
+  // useEffect(() => {
+  //   const filtered = categories.filter((category) => {
+  //     const matchesName = category.name
+  //       .toLowerCase()
+  //       .includes(deferredSearch.toLowerCase())
+  //     const matchesStatus =
+  //       statusFilter === '' ||
+  //       (statusFilter === 'active' && category.isActive) ||
+  //       (statusFilter === 'inactive' && !category.isActive)
+
+  //     return matchesName && matchesStatus
+  //   })
+  //   setFilteredCategories(filtered)
+  // }, [categories, deferredSearch, statusFilter])
 
   const handleDeleteCategory = useCallback(
     async (id: string) => {
