@@ -10,6 +10,7 @@ import { usePageBasedPagination } from '@/hooks/usePageBasedPagination'
 import { CategoryUIModel } from '../category.ui-model'
 import { categoryModelAdapter } from '@/integrations/categories'
 
+// https://medium.com/@akhilanand.ak01/implementing-server-side-pagination-in-react-with-node-js-and-express-417d1c480630
 export function ListCategoriesPage() {
   // ====> inicio search
   const [search, setSearch] = useState<string>('')

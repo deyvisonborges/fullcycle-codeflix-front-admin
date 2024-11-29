@@ -22,12 +22,16 @@ export const createMockHandlers = <T extends StubItem>({
     const paginatedData = stubData.slice(startIndex, endIndex)
     const totalPages = Math.ceil(stubData.length / perPage)
 
+    const notPagination = !page || !perPage
+
     const response = {
-      data: paginatedData,
-      meta: {
-        totalPages,
-        currentPage: page
-      }
+      data: notPagination ? stubData : paginatedData,
+      ...(!notPagination && {
+        meta: {
+          totalPages,
+          currentPage: page
+        }
+      })
     } as unknown as ResponseData<T[]>
 
     await delay()

@@ -1,5 +1,5 @@
 import { apiSlice, apiSliceTags } from '@/config/store/slices/api-slice'
-import { ReadonlyAttributes, ResponseData } from '@/modules/admin/utils/types'
+import { ResponseData } from '@/modules/admin/utils/types'
 import { VideoAPIModel } from './video.api-model'
 import { VideoID } from '../video-id.primitive'
 import { VIDEOS_ENDPOINT } from '../videos.routes'
@@ -7,7 +7,15 @@ import { VIDEOS_ENDPOINT } from '../videos.routes'
 type Results = ResponseData<VideoAPIModel[]>
 type Result = ResponseData<VideoAPIModel>
 
-type UpInsertVideoCommand = Partial<Omit<VideoAPIModel, ReadonlyAttributes>>
+type UpInsertVideoCommand = {
+  id: string
+  title: string
+  description: string
+  year_launched: number
+  opened: boolean
+  rating: string
+  duration: number
+}
 type UpdateVideoCommand = { payload: UpInsertVideoCommand } & VideoID
 
 export const videosApiSlice = apiSlice.injectEndpoints({

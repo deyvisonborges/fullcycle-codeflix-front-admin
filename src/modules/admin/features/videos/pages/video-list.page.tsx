@@ -1,15 +1,21 @@
 import { useCallback, useEffect, useState } from 'react'
-import { useGetVideosQuery } from '../api/videos.api'
+import { useDeleteVideoMutation, useGetVideosQuery } from '../api/videos.api'
 import { VideoUIModel } from '../video.ui-model'
 import { videoUIModelAdapter } from '../video.ui-model-adapter'
 import { HiPencil, HiTrash } from 'react-icons/hi'
 import { useNavigate } from 'react-router-dom'
 import { VideoID } from '../video-id.primitive'
+import { enqueueSnackbar } from 'notistack'
 
 const routeInModuleRouter = '/dashboard/videos'
 
 export function VideoListPage() {
   const navigate = useNavigate()
+
+  const [
+    deleteVideoMutation,
+    { error: deleteError, isSuccess: deleteSuccess }
+  ] = useDeleteVideoMutation()
 
   const { data, isError, isLoading, status } = useGetVideosQuery()
   const [videos, setVideos] = useState<VideoUIModel[]>([])
@@ -20,9 +26,19 @@ export function VideoListPage() {
     }
   }, [data?.data])
 
-  const handleDeleteVideo = useCallback(async (videoId: VideoID) => {
-    console.log('deleted', videoId)
-  }, [])
+  useEffect(() => {
+    if (deleteError)
+      enqueueSnackbar('Erro ao deletar video', { variant: 'error' })
+    if (deleteSuccess)
+      enqueueSnackbar('Video deletado com sucesso', { variant: 'success' })
+  }, [deleteError, deleteSuccess])
+
+  const handleDeleteVideo = useCallback(
+    async ({ id }: VideoID) => {
+      await deleteVideoMutation({ id })
+    },
+    [deleteVideoMutation]
+  )
 
   const handleEditVideo = useCallback(
     async (videoId: VideoID) => {
