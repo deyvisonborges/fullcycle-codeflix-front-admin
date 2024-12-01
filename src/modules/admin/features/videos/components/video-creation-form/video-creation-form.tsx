@@ -1,60 +1,42 @@
-import { ChangeEvent, useRef, useState } from 'react'
+import { ChangeEvent, useRef } from 'react'
 import { Video } from '../video/video'
-import { useAppDispatch, useAppSelector } from '@/config/store'
-import {
-  uploadActions,
-  uploadQueries
-} from '../../../uploads/store/upload-slice'
+import { useAppSelector } from '@/config/store'
+import { uploadQueries } from '../../../uploads/store/upload-slice'
+import { VideoID } from '../../video-id.primitive'
 
-type VideoFile = {
-  file: File
-  previewUrl: string
-  progress: number
+// type VideoFile = {
+//   file: File
+//   previewUrl: string
+//   progress: number
+// }
+
+type VideoCreationFormProps = {
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void
+  handleRemove: (id: VideoID) => void
 }
 
-export function VideoCreationForm() {
+export function VideoCreationForm({
+  handleChange,
+  handleRemove
+}: VideoCreationFormProps) {
   // const uploadList = useAppSelector(uploadQueries.selectUploads)
 
-  const dispatch = useAppDispatch()
+  // const dispatch = useAppDispatch()
   const uploads = useAppSelector(uploadQueries.selectUploads)
 
-  console.log(uploads)
-
-  const [videos, setVideos] = useState<VideoFile[]>([])
+  // const [videos, setVideos] = useState<VideoFile[]>([])
 
   const inputRef = useRef<HTMLInputElement>(null)
 
   // const [selectedFiles, setSelectedFiles] = useState<FileList | null>(null)
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files
-
-    if (files) {
-      Array.from(files).map((file) => {
-        const id = crypto.randomUUID()
-        dispatch(
-          uploadActions.addUpload({
-            id,
-            videoId: id,
-            file,
-            previewURL: URL.createObjectURL(file),
-            field: file.name
-          })
-        )
-      })
-    }
-  }
-
   const handleChoose = () => {
     inputRef.current?.click()
   }
 
-  const removeVideo = (index: number) => {
-    setVideos((prev) => prev.filter((_, i) => i !== index))
-  }
-
   const handleClear = () => {
-    setVideos([])
+    // uploadActions
+    // setVideos([])
     // setSelectedFiles(null)
   }
 
@@ -64,7 +46,7 @@ export function VideoCreationForm() {
         ref={inputRef}
         className="VideoInput_input"
         type="file"
-        onChange={handleFileChange}
+        onChange={handleChange}
         accept=".mov,.mp4"
         multiple // Permite selecionar vários arquivos de uma vez
       />
@@ -72,7 +54,7 @@ export function VideoCreationForm() {
 
       <div className="video-list">
         <h3>Video Sources</h3>
-        {videos.length > 0 && <p onClick={handleClear}>Remover videos</p>}
+        {uploads.length > 0 && <p onClick={handleClear}>Remover videos</p>}
 
         {uploads.map((video, index) => (
           <div key={index} className="video-item">
@@ -80,9 +62,7 @@ export function VideoCreationForm() {
             <Video
               source={video.previewURL}
               progress={100}
-              onHandleRemove={() =>
-                dispatch(uploadActions.deleteUpload(video.videoId))
-              }
+              onHandleRemove={() => handleRemove({ id: video.id })}
             />
             <span>Enviar video {index}</span>
           </div>

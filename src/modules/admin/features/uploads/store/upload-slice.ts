@@ -1,7 +1,7 @@
 import { RootState } from '@/config/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-type UploadState = {
+export type UploadState = {
   id: string
   videoId: string
   field: string
