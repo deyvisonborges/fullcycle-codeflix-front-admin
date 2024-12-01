@@ -1,5 +1,10 @@
 import { ChangeEvent, useRef, useState } from 'react'
 import { Video } from '../video/video'
+import { useAppDispatch, useAppSelector } from '@/config/store'
+import {
+  uploadActions,
+  uploadQueries
+} from '../../../uploads/store/upload-slice'
 
 type VideoFile = {
   file: File
@@ -8,6 +13,13 @@ type VideoFile = {
 }
 
 export function VideoCreationForm() {
+  // const uploadList = useAppSelector(uploadQueries.selectUploads)
+
+  const dispatch = useAppDispatch()
+  const uploads = useAppSelector(uploadQueries.selectUploads)
+
+  console.log(uploads)
+
   const [videos, setVideos] = useState<VideoFile[]>([])
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -18,34 +30,19 @@ export function VideoCreationForm() {
     const files = event.target.files
 
     if (files) {
-      const newVideos = Array.from(files).map((file) => ({
-        file,
-        previewUrl: URL.createObjectURL(file),
-        progress: 0
-      }))
-
-      setVideos((prev) => [...prev, ...newVideos])
-      simulateProgress(newVideos)
+      Array.from(files).map((file) => {
+        const id = crypto.randomUUID()
+        dispatch(
+          uploadActions.addUpload({
+            id,
+            videoId: id,
+            file,
+            previewURL: URL.createObjectURL(file),
+            field: file.name
+          })
+        )
+      })
     }
-  }
-
-  const simulateProgress = (videos: VideoFile[]) => {
-    videos.forEach((_, index) => {
-      const inverval = setInterval(() => {
-        setVideos((prev) => {
-          const updated = [...prev]
-          const currentProgress = updated[index].progress
-
-          if (currentProgress < 100) {
-            updated[index].progress = currentProgress + 10
-          } else {
-            clearInterval(inverval)
-          }
-
-          return updated
-        })
-      }, 500)
-    })
   }
 
   const handleChoose = () => {
@@ -77,13 +74,15 @@ export function VideoCreationForm() {
         <h3>Video Sources</h3>
         {videos.length > 0 && <p onClick={handleClear}>Remover videos</p>}
 
-        {videos.map((video, index) => (
+        {uploads.map((video, index) => (
           <div key={index} className="video-item">
             <div className="video-footer">Video {index + 1}</div>
             <Video
-              source={video.previewUrl}
+              source={video.previewURL}
               progress={100}
-              onHandleRemove={() => removeVideo(index)}
+              onHandleRemove={() =>
+                dispatch(uploadActions.deleteUpload(video.videoId))
+              }
             />
             <span>Enviar video {index}</span>
           </div>

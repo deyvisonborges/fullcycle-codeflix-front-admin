@@ -1,3 +1,4 @@
+import { RootState } from '@/config/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 type UploadState = {
@@ -5,8 +6,14 @@ type UploadState = {
   videoId: string
   field: string
   file: File
+  previewURL: string
   progress?: number
   status?: 'idle' | 'failed' | 'success' | 'loading' | 'pending'
+}
+
+type UploadProgress = {
+  id: string
+  progress: number
 }
 
 const initalState: UploadState[] = []
@@ -27,9 +34,20 @@ export const uploadSlice = createSlice({
       if (index !== -1) {
         state.splice(index, 1)
       }
+    },
+    setProgress(state, action: PayloadAction<UploadProgress>) {
+      const { id, progress } = action.payload
+      const upload = state.find((upload) => upload.id === id)
+
+      if (upload) {
+        upload.progress = progress
+      }
     }
   }
 })
 
+export const uploadQueries = {
+  selectUploads: (state: RootState) => state.uploadSlice
+}
 export const uploadActions = uploadSlice.actions
 export const uploadReducer = uploadSlice.reducer
