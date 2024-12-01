@@ -21,6 +21,12 @@ export const uploadSlice = createSlice({
         status: 'idle',
         progress: 0
       })
+    },
+    deleteUpload(state, action: PayloadAction<string>) {
+      const index = state.findIndex((u) => u.id === action.payload)
+      if (index !== -1) {
+        state.splice(index, 1)
+      }
     }
   }
 })
