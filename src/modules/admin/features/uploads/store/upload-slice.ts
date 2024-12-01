@@ -1,6 +1,6 @@
-import { RootState } from '@/config/store'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { uploadVideo } from './upload-thunk'
+import { RootState } from '@/config/store'
 
 export type UploadState = {
   id: string
@@ -17,11 +17,11 @@ type UploadProgress = {
   progress: number
 }
 
-const initalState: UploadState[] = []
+const initialState: UploadState[] = []
 
 export const uploadSlice = createSlice({
   name: 'uploads',
-  initialState: initalState,
+  initialState,
   reducers: {
     addUpload(state, action: PayloadAction<UploadState>) {
       state.push({
@@ -31,10 +31,7 @@ export const uploadSlice = createSlice({
       })
     },
     deleteUpload(state, action: PayloadAction<string>) {
-      const index = state.findIndex((u) => u.id === action.payload)
-      if (index !== -1) {
-        state.splice(index, 1)
-      }
+      return state.filter((u) => u.id !== action.payload)
     },
     setProgress(state, action: PayloadAction<UploadProgress>) {
       const { id, progress } = action.payload
@@ -48,24 +45,15 @@ export const uploadSlice = createSlice({
   extraReducers(builder) {
     builder.addCase(uploadVideo.pending, (state, action) => {
       const upload = state.find((upload) => upload.id === action.meta.arg.id)
-
-      if (upload) {
-        upload.status = 'loading'
-      }
+      if (upload) upload.status = 'loading'
     })
     builder.addCase(uploadVideo.fulfilled, (state, action) => {
       const upload = state.find((upload) => upload.id === action.meta.arg.id)
-
-      if (upload) {
-        upload.status = 'success'
-      }
+      if (upload) upload.status = 'success'
     })
     builder.addCase(uploadVideo.rejected, (state, action) => {
       const upload = state.find((upload) => upload.id === action.meta.arg.id)
-
-      if (upload) {
-        upload.status = 'failed'
-      }
+      if (upload) upload.status = 'failed'
     })
   }
 })

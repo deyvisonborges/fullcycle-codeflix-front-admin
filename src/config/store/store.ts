@@ -9,6 +9,7 @@ import { categoriesApiSlice } from '@/modules/admin/features/categories/store/sl
 import { apiSlice } from './slices/api-slice'
 import { videosApiSlice } from '@/modules/admin/features/videos/api/videos.api'
 import { uploadReducer } from '@/modules/admin/features/uploads/store/upload-slice'
+import { uploadQueue } from '@/modules/admin/features/uploads/store/upload-queue'
 
 const rootReducers = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer, // Reducer para a API geral
@@ -20,9 +21,9 @@ const rootReducers = combineReducers({
 export const store = configureStore({
   reducer: rootReducers,
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }).concat(
-      apiSlice.middleware
-    )
+    getDefaultMiddleware({ serializableCheck: false })
+      .prepend(uploadQueue.middleware)
+      .concat(apiSlice.middleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>
