@@ -1,15 +1,24 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit'
+import {
+  Action,
+  combineReducers,
+  configureStore,
+  ThunkAction
+} from '@reduxjs/toolkit'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { categoriesApiSlice } from '@/modules/admin/features/categories/store/slice'
 import { apiSlice } from './slices/api-slice'
 import { videosApiSlice } from '@/modules/admin/features/videos/api/videos.api'
+import { uploadReducer } from '@/modules/admin/features/uploads/store/upload-slice'
+
+const rootReducers = combineReducers({
+  [apiSlice.reducerPath]: apiSlice.reducer, // Reducer para a API geral
+  categoriesApi: categoriesApiSlice.reducer, // Reducer específico de `categories`
+  videosApi: videosApiSlice.reducer, // Reducer específico de `videos`
+  uploadSlice: uploadReducer
+})
 
 export const store = configureStore({
-  reducer: {
-    [apiSlice.reducerPath]: apiSlice.reducer, // Reducer para a API geral
-    categoriesApi: categoriesApiSlice.reducer, // Reducer específico de `categories`
-    videosApi: videosApiSlice.reducer // Reducer específico de `videos`
-  },
+  reducer: rootReducers,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware)
 })
