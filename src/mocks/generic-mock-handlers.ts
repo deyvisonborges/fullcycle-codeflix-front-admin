@@ -1,15 +1,17 @@
 import { ResponseData } from '@/modules/admin/utils/types'
-import { delay, http, HttpResponse } from 'msw'
+import { delay, http, HttpHandler, HttpResponse } from 'msw'
 
 type StubItem = { id: string; [key: string]: unknown }
 type HandlersConfig<T extends StubItem> = {
   endpoint: string
   stubData: T[]
+  customHandlers?: HttpHandler[]
 }
 
 export const createMockHandlers = <T extends StubItem>({
   endpoint,
-  stubData
+  stubData,
+  customHandlers = []
 }: HandlersConfig<T>) => [
   http.get(endpoint, async ({ request }) => {
     const url = new URL(request.url)
@@ -79,5 +81,7 @@ export const createMockHandlers = <T extends StubItem>({
 
     await delay()
     return HttpResponse.json({ data: updatedItem })
-  })
+  }),
+
+  ...customHandlers
 ]
