@@ -23,8 +23,11 @@ export const videosMockHandlers = createMockHandlers<VideoAPIModel>({
         })
       }
 
-      await delay(2000)
-      return HttpResponse.json(null)
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          return resolve(HttpResponse.json(null))
+        }, 2000)
+      })
     })
   ]
 })
