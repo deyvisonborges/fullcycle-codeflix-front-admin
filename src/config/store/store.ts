@@ -10,12 +10,14 @@ import { apiSlice } from './slices/api-slice'
 import { videosApiSlice } from '@/modules/admin/features/videos/api/videos.api'
 import { uploadReducer } from '@/modules/admin/features/uploads/store/upload-slice'
 import { uploadQueue } from '@/modules/admin/features/uploads/store/upload-queue'
+import { authSlice } from '@/modules/auth/store/auth-slice'
 
 const rootReducers = combineReducers({
   [apiSlice.reducerPath]: apiSlice.reducer, // Reducer para a API geral
   categoriesApi: categoriesApiSlice.reducer, // Reducer específico de `categories`
   videosApi: videosApiSlice.reducer, // Reducer específico de `videos`
-  uploadSlice: uploadReducer
+  uploadSlice: uploadReducer,
+  authSlice: authSlice.reducer
 })
 
 export const store = configureStore({
