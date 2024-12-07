@@ -7,6 +7,7 @@ import { ThemeProvider } from './config/styles/theme/theme.provider.tsx'
 import { RouterProvider } from 'react-router-dom'
 import { routes } from './config/routing/index.tsx'
 import { SnackbarProvider } from 'notistack'
+import { KeycloakProvider } from './modules/auth/providers/keycloak-provider.tsx'
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') return
@@ -18,11 +19,13 @@ enableMocking().then(() => {
   createRoot(document.getElementById('root')!).render(
     <StrictMode>
       <ReduxProvider store={store}>
-        <ThemeProvider>
-          <SnackbarProvider>
-            <RouterProvider router={routes} />
-          </SnackbarProvider>
-        </ThemeProvider>
+        <KeycloakProvider>
+          <ThemeProvider>
+            <SnackbarProvider>
+              <RouterProvider router={routes} />
+            </SnackbarProvider>
+          </ThemeProvider>
+        </KeycloakProvider>
       </ReduxProvider>
     </StrictMode>
   )

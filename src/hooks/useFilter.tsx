@@ -1,5 +1,5 @@
-import { useDeferredValue, useState } from 'react'
+// import { useDeferredValue, useState } from 'react'
 
-export function useFilter<T>({ data }: { data: T }) {
-  const filter = useDeferredValue({ query: '', fields: [] })
-}
+// export function useFilter<T>({ data }: { data: T }) {
+//   const filter = useDeferredValue({ query: '', fields: [] })
+// }
